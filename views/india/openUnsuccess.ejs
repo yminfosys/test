@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+      
+    </head>
+    <body>
+       
+      
+      <div class="container">
+        <%if(payGetway.PaymentType=="wallet"){%>      
+            <div style="margin-top:20vh;" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div style="text-align: center;" class="thumbnail">
+                    <img src="/india/images/Transaction-Failed.png" alt="">
+                    <div class="caption">
+                      <p>Recharge Amount: &#8377; <%=payGetway.payment%></p>
+                      <p><%=payGetway.status%></p>
+                      <a href="../india"><button type="button" class="btn btn-warning">Back</button></a>  
+                    </div>
+                </div>
+            </div>
+        <%}%> 
+        <%if(payGetway.PaymentType=="driverDeposit"){%>       
+            <div style="margin-top:20vh;" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div style="text-align: center;" class="thumbnail">
+                    <img src="/india/images/Transaction-Failed.png" alt="">
+                    <div class="caption">
+                      <p><%=payGetway.status%></p>
+                      <a href="../india/drv"><button type="button" class="btn btn-warning">Back</button></a>  
+                    </div>
+                </div>
+            </div>
+        <%}%>
+        <%if(payGetway.PaymentType=="preDriverDeposit"){%>       
+            <div style="margin-top:20vh;" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div style="text-align: center;" class="thumbnail">
+                    <img src="/india/images/Transaction-Failed.png" alt="">
+                    <div class="caption">
+                      <p><%=payGetway.status%></p>
+                      <a href="../india/preDrv"><button type="button" class="btn btn-warning">Back</button></a>  
+                    </div>
+                </div>
+            </div>
+        <%}%>
+      </div>
+      
+       
+        
+        
+        <script>
+            setTimeout(function(){
+                if('<%=payGetway.PaymentType%>'=="driverDeposit"){
+                    window.location.href='../india/drv';
+                }
+                if('<%=payGetway.PaymentType%>'=="wallet"){
+                    window.location.href='../india';
+                }
+
+                if('<%=payGetway.PaymentType%>'=="preDriverDeposit"){
+                    window.location.href='../india/preDrv';
+                }
+                
+            },5*1000);
+        </script>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

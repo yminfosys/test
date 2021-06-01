@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paa Login</title>
+        <link href="/bd/images/logo/paaicon.png" rel="icon">
+        <link rel="stylesheet" type="text/css" href="/bd/stylesheets/instyle.css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- <script src="/bd/javascripts/inPreDriverjs.js"></script> -->
+        
+        
+    </head>
+    <body>
+        <!-- <div class="headernav">
+            <img src="/bd/images/logo/paalogo.png">
+        </div> -->
+        
+        
+       
+       <div class="container-fluid">
+
+        <div style="background-color: #facb3d;" class="row">
+            <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4 ">
+                <img style="width: 100%;" src="/bd/images/logo/paalogo.png">
+            </div>
+        </div>
+        <div style="margin-top: 10px;" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <ul class="list-group">
+                   <li class="list-group-item active ">
+                     <span style="font-size: medium; " class="badge">&#2547; <%=accountBalance.toFixed(2)%></span>
+                      Account Balance
+                   </li>
+                </ul>
+           </div>
+        </div>           
+         
+         <div style="margin-top: 5px;" class="row">
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-group">
+                    <li class="list-group-item active ">
+                      <span style="font-size: medium; " class="badge">&#2547; <%=dailyBalacne.accountBalance.toFixed(2)%> </span>
+                        Daliy Balance
+                    </li>
+                    <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#2547; <%=dailyBalacne.totalErning.toFixed(2)%></span>
+                        Daily Earnings
+                      </li>
+                    <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#2547; <%=dailyBalacne.driverIncentiv.toFixed(2)%></span>
+                        Daily Incetive
+                       
+                      </li>
+                      <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#2547; <%=dailyBalacne.driverCashCollectio.toFixed(2)%></span>
+                        Daily Cash collections
+                       
+                      </li>
+                </ul>                
+            </div>
+         </div>
+
+
+         <div class="row">
+             
+             <%if( Number(accountBalance) < 0){%> 
+            <div class="col-xs-12 col-sm-12"> 
+                <label>You need to deposit bellow amount to company account</label> 
+                <form action="/bd/pay" method="POST" class="form-inline" role="form">                                           
+                     <input type="hidden" name="payAmount" class="form-control" value="<%= Math.abs(accountBalance).toFixed(2)%>" >                       
+                     <input type="hidden" name="CustID" value="<%=pilot.pilotID%>">
+                     <input type="hidden" name="typeOfReqest" value="driverDeposit">                  
+                    <button type="submit" class="btn btn-success btn-block col-xs-12 col-sm-12">Deposit &#2547; <%= Math.abs(accountBalance).toFixed(2)%></button> 
+                </form>              
+                               
+            </div>
+            <%}else{%>
+            <div class="col-xs-12 col-sm-12"> 
+                <form name="myForm" action="/bd/drv/withdrawal" onsubmit="return validateForm()" method="POST" class="form-inline" role="form">                                           
+                    <input type="hidden" name="withdrawlAmount" class="form-control" value="<%= Math.abs(accountBalance).toFixed(2)%>" >                       
+                    <input type="hidden" name="pilotID" value="<%=pilot.pilotID%>">
+                    <input type="hidden" name="typeOfReqest" value="driverWidthral">
+                <button type="submit" class="btn btn-warning btn-block col-xs-12 col-sm-12">Withdrawal &#2547; <%= Math.abs(accountBalance).toFixed(2)%></button>               
+                </form>               
+            </div>
+            <%}%>
+        </div>
+
+        
+       
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+            <div class="form-group col-xs-8 col-sm-8">
+                
+                <label>Select Date</label>
+                <%var mm=new Date().getMonth()+1; var dd= new Date().getDate(); var yyyy=new Date().getFullYear()%>
+                <%if(mm<10){mm = '0' + mm }%>
+                <%if(dd<10){dd = '0' + dd }%>    
+                <input  id="day" type="date" class="form-control" value="<%=""+yyyy+"-"+mm+"-"+dd+""%>">
+                
+            </div>
+            <div class="form-group col-xs-4 col-sm-4">
+                <label style="color: #FFF;">&nbsp;g</label>
+                <button onclick="dailyLedger()" class="btn btn-primary ">Submit</button> 
+            </div>
+            <div id="dailyLedger" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="overflow-x: scroll;" >
+                <!-- <ul class="list-group">
+                    <li class="list-group-item active ">
+                        19-10-2020
+                    </li>
+
+                    <li class="list-group-item list-group-item-info ">                        
+                         Earnings : &#2547;100  Incentive: &#2547;0   Collection : &#2547;0 <br> Withdrawal / Deposit : &#2547;0
+                          
+                      </li>
+                </ul>  -->
+                
+                
+            </div>
+
+
+            
+        </div>
+
+        <div style="margin-top: 20px;" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               
+                <%if(1==0){%> 
+                <a href="../Drv"><button  type="button" class="btn btn-danger col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">Go to Offline</button> </a>              
+                <%}else{%> 
+                <a href="../Drv"><button  type="button" class="btn btn-danger  col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">Back</button>  </a>              
+                <%}%>
+            </div>
+        </div>
+ 
+           
+       </div>
+       
+       <script>
+        function dailyLedger(){
+            var day=$("#day").val();
+            $.post('/bd/drv/driverDatewiseLedger',{day:day},function(data){
+                   $("#dailyLedger").html('<ul class="list-group">\
+                    <li class="list-group-item active ">'+day+'</li>\
+                    <li class="list-group-item list-group-item-info ">\
+                        Earnings : &#2547;'+data.dailyBalacne.totalErning+'  Incentive: &#2547;'+data.dailyBalacne.driverIncentiv+' <br>  Cash Collection : &#2547;'+data.dailyBalacne.driverCashCollectio+' <br> Withdrawal : &#2547;'+data.widthralDeposit.Withdrawal+' Deposit : &#2547;'+data.widthralDeposit.deposit+'</li>\
+                        </ul>');
+                $("#dailyLedger").css({"display":"block"});
+
+            });           
+        } 
+
+        function validateForm() {
+         var x = document.forms["myForm"]["withdrawlAmount"].value;
+         if (x > 49) {
+             
+             return true;
+         }else{
+             alert("amount Should be more the 50");
+             return false;  
+         }
+         }
+    </script> 
+ 
+     
+            
+       
+        
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+

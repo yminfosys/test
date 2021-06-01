@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script>
+         function uploadPhotos(url){
+    // Read in file
+    var file = event.target.files[0];
+
+    // Ensure it's an image
+    if(file.type.match(/image.*/)) {
+        console.log('An image has been loaded');
+
+        // Load the image
+        var reader = new FileReader();
+        reader.onload = function (readerEvent) {
+            var image = new Image();
+            image.onload = function (imageEvent) {
+
+                // Resize the image
+                var canvas = document.createElement('canvas'),
+                    max_size = 544,// TODO : pull max size from a site config
+                    width = image.width,
+                    height = image.height;
+                if (width > height) {
+                    if (width > max_size) {
+                        height *= max_size / width;
+                        width = max_size;
+                    }
+                } else {
+                    if (height > max_size) {
+                        width *= max_size / height;
+                        height = max_size;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+                var dataUrl = canvas.toDataURL('image/jpeg');
+                var resizedImage = dataURLToBlob(dataUrl);
+                $.event.trigger({
+                    type: "imageResized",
+                    blob: resizedImage,
+                    url: dataUrl
+                });
+            }
+            image.src = readerEvent.target.result;
+            //$("#imga").html('<img src="readerEvent.target.result">')
+        }
+        reader.readAsDataURL(file);
+    }
+};
+
+
+/* Utility function to convert a canvas to a BLOB */
+var dataURLToBlob = function(dataURL) {
+    var BASE64_MARKER = ';base64,';
+    if (dataURL.indexOf(BASE64_MARKER) == -1) {
+        var parts = dataURL.split(',');
+        var contentType = parts[0].split(':')[1];
+        var raw = parts[1];
+
+        return new Blob([raw], {type: contentType});
+    }
+
+    var parts = dataURL.split(BASE64_MARKER);
+    var contentType = parts[0].split(':')[1];
+    var raw = window.atob(parts[1]);
+    var rawLength = raw.length;
+
+    var uInt8Array = new Uint8Array(rawLength);
+
+    for (var i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], {type: contentType});
+}
+/* End Utility function to convert a canvas to a BLOB      */
+
+
+/* Handle image resized events */
+$(document).on("imageResized", function (event) {
+    var data = new FormData($("form[id*='uploadImageForm']")[0]);
+    if (event.blob && event.url) {
+        data.append('image_data', event.blob);
+
+        $.ajax({
+            url: event.url,
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            success: function(data){
+               //handle errors...
+            }
+        });
+    }
+});
+
+
+        </script>
+    </head>
+    <body>
+        
+<form action="/india/file" method="POST" id="uploadImageForm" enctype="multipart/form-data">
+    <input id="name" value="#{name}" />
+    <input name="imagefile" type="file" id="takePictureField" accept="image/*" onchange="uploadPhotos('#{imageUploadUrl}')" />
+
+<button type="submit" class="btn btn-sm btn-default">button</button>
+
+</form>
+<div id="imga"></div>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

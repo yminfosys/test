@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paa Login</title>
+        <link href="/uk/images/logo/paaicon.png" rel="icon">
+        <link rel="stylesheet" type="text/css" href="/uk/stylesheets/instyle.css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        
+    </head>
+    <body>
+        <div class="container-fluid">
+
+            <div style="background-color: #facb3d;" class="row">
+                <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4 ">
+                    <img style="width: 100%;" src="/uk/images/logo/paalogo.png">
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;" class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                   <ul class="list-group">
+                       <li class="list-group-item active ">
+                         <span style="font-size: medium;" class="badge">  <%=Number(monthlyDuty.duty).toFixed(2)%></span>
+                         <span style="font-size: medium;" class="badge">  <%=Number(monthlyDuty.overtime).toFixed(2)%></span>
+                         Total Hour in This Month <br> Over tome and Duty Hour
+                       </li>
+
+                       <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">  <%=Number(dailyDuty.overtime).toFixed(2)%></span>
+                        Today's Over Time Duty Hour
+                      </li>
+                       
+                         <li class=" list-group-item list-group-item-info ">
+                           <span class="badge"><%=Number(dailyDuty.duty).toFixed(2)%></span>
+                           Today's Duty Hour
+                         </li>
+
+                        
+                     </ul>
+                                    
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                    <div class="form-group col-xs-8 col-sm-8">
+                        <label>Select Month</label>
+                        <select id="month" class="form-control">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xs-4 col-sm-4">
+                        <label style="color: #FFF;">&nbsp;g</label>
+                        <button onclick="monthlyhourcalculetion()" class="btn btn-primary ">Submit</button> 
+                    </div>
+
+                    
+                </div>
+
+                <div id="monthlyhours" style="display: none;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- <ul class="list-group">
+                        <li class="list-group-item active ">
+                          
+                          Total Hours of this Month
+                        </li>
+                        <li class=" list-group-item list-group-item-info ">
+                            <span class="badge"> 0.00</span>
+                            Over Time Duty Hour
+                          </li>
+                        <li class=" list-group-item list-group-item-info ">
+                            <span class="badge"> 0.00</span>
+                            Duty Hour 
+                          </li>
+                    </ul>                 -->
+                </div>
+
+                  
+        <div style="margin-top: 20px;" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">               
+                <a href="../uk/preDrv"><button  type="button" class="btn btn-danger col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">Back</button> </a>              
+               
+            </div>
+        </div>
+            </div>
+        </div>
+        <script>
+            function monthlyhourcalculetion(){
+                var month=$("#month").val();
+                $.post('/uk/monthlyhours',{month:month},function(data){
+                    //console.log("monthly",data);
+                    $("#monthlyhours").html('<ul class="list-group">\
+                        <li class="list-group-item active ">\
+                            Total Hours of this Month\
+                        </li>\
+                        <li class=" list-group-item list-group-item-info ">\
+                            <span class="badge">'+data.monthlyDuty.overtime.toFixed(2)+'</span>\
+                            Over Time Duty Hour\
+                          </li>\
+                        <li class=" list-group-item list-group-item-info ">\
+                            <span class="badge">'+data.monthlyDuty.duty.toFixed(2)+'</span>\
+                            Duty Hour\
+                        </li>\
+                    </ul> ');
+                    $("#monthlyhours").css({"display":"block"});
+
+                });           
+            } 
+        </script>        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+

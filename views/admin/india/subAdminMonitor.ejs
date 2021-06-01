@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sub Admin</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <link rel="stylesheet" type="text/css" href="/admin/india/subAdminMonitor.css" />
+        <script src="/index/javascripts/socket.io.js"></script>
+        <script src="/admin/india/subAdminMonitor.js"></script>
+    </head>
+    <body>        
+        <div class="container-fluid">           
+           <div class="page-header">
+             <h1>Driver Monitor Pannel<small> City : <%=subAdmin.subadmincitys[0]%> Sub Admin: ID: <%=subAdmin.adminID%></small></h1>
+              <input id="driverCity" type="hidden" value="<%=subAdmin.subadmincitys[0]%>">
+            </div>
+           
+           <div class="row">
+               <div style="height: 500px; overflow-y: auto;" id="DriverList" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                 
+                 <button onclick="getActiveDriverList()" type="button" class="btn btn-success">Get Driver List</button>
+                 
+                
+                  
+               </div>
+
+               <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <div id="dNF" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <button onclick="getDriverNotFound()" class="btn btn-primary" type="button">
+                    Driver Not Found 
+                  </button>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <button onclick="deliveryDetails()" type="button" class="btn btn-success">Delivery Details</button>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <button type="button" class="btn btn-success">Order Cancel Report</button>
+                  </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <div class="col-sm-4"> Latitude:
+                      <input type="text" id="maplat" class="form-control" value="<%=CityGPS[0]%>">
+                    </div>
+                    <div class="col-sm-4">Longitude:
+                      <input type="text" id="maplng" class="form-control" value="<%=CityGPS[1]%>">
+                    </div>
+                    <div class="col-sm-4">                      
+                      <button id="loadmap" type="button" class="btn btn-success">Load Map</button>                      
+                    </div>
+                  </div>
+                  
+                  <div id="mapcontent" class="container-fluid"> 
+                    <div id="map"></div>
+                  </div>
+                </div>
+                
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <input type="hidden" id="maplocationmode" value="1">
+                  
+                  <input type="hidden" id="subAdminID" value="<%=subAdmin.adminID%>">
+                  <div class="form-group">
+                    <div class="col-sm-6"> Demand Location:
+                      <input type="text" id="demandlatlng" onfocus="latlngFocas(1)" class="form-control">
+                    </div>
+                    <div class="col-sm-6"> Driver ID:
+                      <input type="text" id="demandDriverid" class="form-control" >
+                    </div>
+                    <div class="col-sm-12">
+                      <button onclick="gotodemand('<%=subAdmin.adminID%>')" id="gotodemand" style="margin-top: 10px;" type="button" class="btn btn-success col-sm-12"> Go to Demand Area
+                        
+                      </button>
+                    </div>
+                  </div>
+
+               </div>
+
+               <div style="margin-top: 20px; border-top: 1px solid #000;" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <div class="col-sm-6"> PickUp Location:
+                    <input type="text" id="mPickuplatlng" onfocus="latlngFocas(2)" class="form-control">
+                  </div>
+                  <div class="col-sm-6"> Drop Location:
+                    <input type="text" id="mDroplatlng" onfocus="latlngFocas(3)" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-6"> PickUp Address:
+                    <textarea  id="mPickupAds" class="form-control" rows="2" required="required"></textarea>
+                  </div>
+                  <div class="col-sm-6"> Drop Address:
+                  <textarea  id="mDropAds" class="form-control" rows="2" required="required"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-6"> Customer Mobile :
+                    <input type="text" id="mCustMobile" class="form-control">
+                  </div>
+                  <div class="col-sm-6"> Driver ID:
+                    <input type="text" id="mDriverID" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-6"> Travel Mode :
+                    <select name="" id="travelTypemode" class="form-control" >
+                        <option value="">Select Travel Mode</option>
+                        <option value="1">Bike</option>
+                        <option value="2">Auto</option>
+                        <option value="3">4 seat Mini Cab</option>
+                        <option value="4">6 seat Cab</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-6"> Payment By:
+                    <select name="" id="paymentType" class="form-control" >
+                      <option value="1">Cash</option>
+                  </select>
+                  </div>
+                </div>
+
+                <div  class="form-group">
+                  <div id="orderdetails" style="margin-top: 10px; background-color: burlywood; border-radius: 10px; border: 1px solid #000; display: none;" class="col-sm-10 col-sm-offset-1">
+                    <p>Distance Fare : Rs. 14.34 , Time Fare : 08.70 </p>
+                    <p>Total Fare : 21</p>
+                    <input type="hidden" id="" value="">
+                  </div>
+                  
+                </div>
+
+                <div class="col-sm-6">
+                  <button onclick="calculateOrder('<%=subAdmin.adminID%>')" id="" style="margin-top: 10px;" type="button" class="btn btn-success col-sm-5"> Calculate</button>
+                  <button onclick="clearDataCustOrder()" id="" style="margin-top: 10px;" type="button" class="btn btn-success col-sm-5"> Clear Data</button>
+                </div>
+                <div class="col-sm-6">
+                  <button onclick="onbehalfCusOrder('<%=subAdmin.adminID%>')" id="" style="margin-top: 10px;" type="button" class="btn btn-success col-sm-12">Ride Booking</button>
+        
+                </div>
+
+               </div>
+
+
+
+           </div>
+            
+        </div> 
+       
+
+      </div>
+      <div id="driverNF"  style="position:fixed; top:0vh; width: 100%; height: 100vh; background-color: darkgray; z-index: 150; display: none; ">
+        
+
+          <div class="row">
+           
+              <div  class="col-xs-1 col-sm-1 col-xs-offset-1 col-sm-offset-10">
+                <button onclick="closeDriverNF()" type="button" class="btn btn-success ">Close</button>                                         
+              </div>
+
+            <div id="driverNFList" style="height: 93vh; overflow-y: auto;" class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1 "> 
+              <ul id="driver'+val.pilotID+'" class="list-group">\
+                <li class="list-group-item active ">\
+                  <span style="font-size: 12px; cursor: pointer; background-color: rgb(204, 121, 91); " onclick="findNewDriver('+val.mobileNumber+')" class="badge">view Details</span>\
+                  <span style="font-size: 12px; " class="badge">Status : New</span>\
+                  New Driver Name: '+val.name+'\
+                </li>\
+                <li class=" list-group-item list-group-item-info ">\
+                    Mobile No: +91 '+val.mobileNumber+' Date: '+val.date+'<br>\
+                    Email Id : '+val.email+' \
+                  </li>\
+            </ul>
+              </div>
+          </div>
+      </div>
+
+      <div id="deliveryDetails" style="position: absolute; display: none; top: 100px; left: 22%; width: 40%; height: 500px; background-color: rgb(107, 110, 109); z-index: 100; overflow-y: auto;">
+        
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            
+            <ul  class="list-group">
+              <li class="list-group-item active ">
+                <span style="font-size: 12px; cursor: pointer; background-color: rgb(128, 133, 132); " onclick="findNewDriver('+val.mobileNumber+')" class="badge">Confram</span>
+                <span style="font-size: 12px; " class="badge">&#8377; 20.00</span>
+                <span style="font-size: 12px; " class="badge">CustID:1003</span>
+                 Delivery Requiest  Order ID: 12345
+              </li>
+              <li class=" list-group-item list-group-item-info ">
+                 <span style="font-size: 12px; " class="badge">Mode: 1</span>
+                 <span style="font-size: 12px; " class="badge">Type: 1</span>
+                 Name: Sukanta<br>
+                  Pickup:bhd jhfdjg jhdfgjhfj<br> LatLng: 55.77888,87.66666<br>
+                  Direction:kjhdfkghfdkghjh jfdjghdjfghf <br>
+                  Mobile:7674356567 <br>
+                  Name: Sukanta<br>
+                  Drop:bhd jhfdjg jhdfgjhfj<br> LatLng: 55.77888,87.66666<br> 
+                  Direction:kjhdfkghfdkghjh jfdjghdjfghf <br>
+                  Mobile:5637465<br>
+                  Date: 12344 56666
+                </li>
+          </ul>
+            
+          </div>
+        </div>
+        
+      </div>
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <script async defer   
+        src="https://maps.googleapis.com/maps/api/js?key=<%=YOUR_API_KEY%>&callback=initMap">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container-fluid">
+
+            <div style="background-color: #facb3d; height: 10vh;" class="row">
+                <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4 ">
+                    <img style="width: 100%; height: 10vh;" src="/bd/images/logo/paalogo.png">
+                </div>
+            </div>
+            
+            <div class="row">
+                <form action="/bd/admin/reg" method="POST">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4 ">
+                    <div class="page-header">
+                        <h1>Admin reg<small> bd</small></h1>
+                    </div>
+                    <div class="form-group">
+                        <label>Admin User</label>
+                        <input type="email" class="form-control" name="email" placeholder="Email Address">
+                    </div>               
+                    <div class="form-group">
+                        <label>Admin Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Admin mobile</label>
+                        <input type="number" class="form-control" name="mobile" placeholder="Enter mobile">
+                    </div>
+                    <div class="form-group">
+                        <label>Admin address</label>
+                        <input type="text" class="form-control" name="address" placeholder="Enter address">
+                    </div>
+                 
+                    <div class="form-group">                        
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            
+            
+            
+        </div>
+            
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </script>>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

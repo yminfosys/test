@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/index/stylesheets/sidebar.css" />
+        <link rel="stylesheet" type="text/css" href="/index/stylesheets/navbar.css" />
+        <link rel="stylesheet" type="text/css" href="/admin/bd/subAdmin.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-def navbar-fixed-top">
+            <div class="container-fluid ">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../">
+                        <img style="margin-top: -10px;" alt="brand" src="/index/images/logo/paalogo.png" width="100" height="40">
+                  </a>
+              </div>
+          
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a></li>
+                    <li><a ><i class="fa fa-amazon" aria-hidden="true"></i> Feature</a></li>
+                    <li><a  ><i class="fa fa-gbp" aria-hidden="true"></i>&nbsp; Pricing</a></li>
+                    <li><a> <i class="fa fa-free-code-camp" aria-hidden="true"></i> Try it Free</a></li>
+                    <li><a href="/customer"><i class="fa fa-rocket" aria-hidden="true"></i>Book a Ride</a></li>
+                    <li><a href="/driver"><i class="fa fa-rocket" aria-hidden="true"></i>Driver</a></li>
+                  
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        <div id="sidebar-waper">
+            <div class="togle-btn" onclick="sidebartoggle()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="sidebar-menue">
+            <li class="Dashboard"><a href="../admin/sub"> <i class="fa fa-dashboard" aria-hidden="true"></i><span> Dashboard</span></a></li>
+            <li class="Profile">
+              <a href="#ProfileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                  <i class="fa fa-cogs"></i>
+                  <span>Driver</span>
+              </a>
+              <ul class="collapse " id="ProfileSubmenu">
+                  <li><a href="#">New Driver</a></li>
+                  <li><a href="#verify-driver">Vreify Driver</a></li>
+                
+                  </ul>
+            </li>
+            <li class="Logout"><a href="/bd/logout/cust"> <span> Logout</span></a></li>
+            </ul>
+        </div>
+        
+        <div id="main-content">
+          
+          <div class="container-fluid">
+          <div id="Driver-search" class="form-inline"> 
+                      
+              <div class="form-group">
+                <label for="mobile">Driver Mobile No:</label>
+                <input type="text" class="form-control" id="mobile" placeholder="10 Digit Mobile Number">
+              </div>
+              <button onclick="findDriver()" type="button" class="btn btn-default">Find</button>
+            
+              
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <br><br>
+                
+                    <label for="mobile"> Daily Fule Price Update </label>
+                    <hr>                   
+                 
+
+                  <div class="form-group">
+                    <select id="city" class="form-control">
+                      <option value="">Select City</option>
+                    <%if(city.length > 0){%>
+                      <%city.forEach(function(val){%>
+                        
+                          <option value="<%=val.CityName%>"><%=val.CityName%></option>
+                       
+                      <%})%>
+                    <%}%>
+                  </select>                    
+                   
+                  </div>
+
+                  <div class="form-group">                    
+                    <input type="text" class="form-control" id="petrol" placeholder="Petrol">
+                    <input type="text" class="form-control" id="diesel" placeholder="Diesel">
+                    <input type="text" class="form-control" id="cng" placeholder="CNG">
+                  </div>
+                  <button onclick="updatePetrolPrice()" type="button" class="btn btn-default">Update</button>
+                  
+                </div>
+                
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <br><br>
+                  <div class="thumbnail">
+                    <img data-src="#" alt="">
+                    <div class="caption">
+                      <%=petrol%>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              
+              
+
+          </div> 
+            <div id="verify-driver" > 
+                <div class="profile-main">
+                  <div class="profile-header">
+                    <div class="user-detail">
+                      <div class="user-image">
+                        <img src="http://nicesnippets.com/demo/up-profile.jpg">
+                      </div>
+                      <div class="user-data">
+                        <h2>Smith Alexander</h2>
+                        <span class="post-label">Admin</span>
+                        <span class="post-label">Speaker</span>
+                        <span class="post-label">AMA</span>
+                        <p>Founder and CEO at <strong>NewSpot</strong><br>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>  Boston, MA, United States
+                        </p>
+                      </div>
+                      
+                    </div>
+                    <div class="tab-panel-main">
+                      <ul class="tabs">
+                        <li class="tab-link current" data-tab="Basic-detail">Basic Detail</li>
+                        <li class="tab-link" data-tab="bank-details">Bank Details</li>
+                        <li class="tab-link" data-tab="document">Documents</li>
+                      </ul>
+                      <div id="Basic-detail" class="tab-content current"> 
+                        <div class="container-fluid">                          
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                              <div class="form-group">
+                                <label>Engine Type : </label>
+                                <select id="engintype" class="form-control">
+                                  <option value="Petrol">PETROL</option>
+                                  <option value="Diesel">DIESEL</option>
+                                  <option value="CNG">CNG</option>
+                                </select>                                
+                              </div>
+
+                              <div class="form-group">
+                                <label>Mileage (KM/LTR) :  </label>
+                                <input type="text" id="milege" class="form-control">                                
+                              </div>
+                              <div class="form-group">
+                                <label>Select Driver City : </label>
+                                <select id="driverCity" class="form-control">
+                                  <option value="">Select City</option>
+                                <%if(city.length > 0){%>
+                                  <%city.forEach(function(val){%>
+                                    
+                                      <option value="<%=val.CityName%>"><%=val.CityName%></option>
+                                   
+                                  <%})%>
+                                <%}%>
+                              </select>                    
+                               
+                              </div>
+                              <div class="form-group">
+                                <label>Driver Travel Mode : </label>
+                                <select id="travelmod" class="form-control">
+                                  <option value="">Select Travel Mode</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                  <option value="7">7</option>
+                                  <option value="8">8</option>                                
+                              </select>                    
+                               
+                              </div>
+                              <button onclick="submitEngintype()" class="btn btn-primary">Submit</button>
+                              <div id="mssg"></div>
+                            </div>
+
+                            <div id="BacicDetals" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">                            
+                              
+                                <div class="thumbnail">
+                                  <img data-src="#" alt="">
+                                  <div class="caption">
+                                    <h5>Besic Details</h5>
+                                    <hr>
+                                    <p>Engin Type : Petrol</p>
+                                    <p>Milege (KM/LTR) : 55</p>
+                                   
+                                  </div>
+                                </div>
+                              
+                              
+
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div id="bank-details" class="tab-content">
+                        <div class="Edu-box-main">
+                           <h2><i class="fa fa-bank" aria-hidden="true"></i> Bank Details</h2>
+                           <div class="Edu-box">
+                             
+                           </div>
+                           
+                        </div>
+                      </div>
+                      <div id="document" class="tab-content">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                          <div class="thumbnail">
+                            <img src="http://nicesnippets.com/demo/up-profile.jpg" onclick="window.open(this.src)">
+                            <div class="caption">
+                              <p class="text-center">Id Prove</p>                              
+                            </div>
+                          </div>
+                        </div>
+                        <button onclick="verifyDriver()" type="button" class="btn btn-large btn-block btn-success">Verify</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="clear: both;"></div>
+                
+                </div>
+              
+                
+              
+            </div>
+            
+          </div>
+          
+
+        </div>
+        
+        <script src="/admin/bd/subAdmin.js"></script>
+        <!-- jQuery -->
+        <script src="/index/javascripts/sidebar.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

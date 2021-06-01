@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+       
+        <link rel="stylesheet" type="text/css" href="/index/stylesheets/navbar.css" />
+        <link rel="stylesheet" type="text/css" href="/admin/india/subAdmin.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-def navbar-fixed-top">
+            <div class="container-fluid ">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../">
+                        <img style="margin-top: -10px;" alt="brand" src="/index/images/logo/paalogo.png" width="100" height="40">
+                  </a>
+              </div>
+          
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li ><a href="../sub"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a></li>
+                    <li><a ><i class="fa fa-amazon" aria-hidden="true"></i> Feature</a></li>
+                    <li><a  ><i class="fa fa-gbp" aria-hidden="true"></i>&nbsp; Pricing</a></li>
+                    <li><a> <i class="fa fa-free-code-camp" aria-hidden="true"></i> Try it Free</a></li>
+                    <li><a href="/customer"><i class="fa fa-rocket" aria-hidden="true"></i>Book a Ride</a></li>
+                    <li class="active"><a href="/driver"><i class="fa fa-rocket" aria-hidden="true"></i>Driver</a></li>
+                  
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        
+        
+        <div id="main-content">
+          
+          <div class="container-fluid">
+              
+              <div class="row">
+                  <div style="margin-top: 50px;" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="form-group">
+                        <label for="mobile">Driver Mobile No:</label>
+                        <input type="text" class="form-control" id="mobile" placeholder="10 Digit Mobile Number">
+                    </div>
+                    <div class="form-group">
+                        <button onclick="searchDriver()" type="button" class="btn btn-default">Find</button>
+                    </div> 
+                  </div>
+
+                    <div style="margin-top: 20px;" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                        <div id="driver-details">
+                           
+                           <div id="page-head" class="page-header">
+                             <h1>SUKANTA SARDAR<small> Mobile: +91 9733241080 ID: 1003</small></h1>                            
+                           </div>
+                           <input type="hidden" id="pilotID">                           
+                           <div class="row">
+                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                               <label class="col-xs-12 col-sm-12 text-center" >Monthly Duty Hours count</label>
+                              <div class="form-group col-xs-8 col-sm-8">                                
+                                <select id="month" class="form-control">
+                                    <option value="0">January</option>
+                                    <option value="1">February</option>
+                                    <option value="2">March</option>
+                                    <option value="3">April</option>
+                                    <option value="4">May</option>
+                                    <option value="5">June</option>
+                                    <option value="6">July</option>
+                                    <option value="7">August</option>
+                                    <option value="8">September</option>
+                                    <option value="9">October</option>
+                                    <option value="10">November</option>
+                                    <option value="11">December</option>
+                                </select>
+                                 
+                            </div>
+                            <div class="form-group col-xs-4 col-sm-4">
+                              <button onclick="subdrivermonthlyhour()" class="btn btn-primary ">Submit</button>
+                            </div>
+                            <div id="dutyhr" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                              <ul class="list-group">\
+                                <li class="list-group-item active ">\
+                                    Total Hours of this Month\
+                                </li>\
+                                <li class=" list-group-item list-group-item-info ">\
+                                    <span class="badge">'+data.monthlyDuty.overtime.toFixed(2)+'</span>\
+                                    Over Time Duty Hour\
+                                  </li>\
+                                <li class=" list-group-item list-group-item-info ">\
+                                    <span class="badge">'+data.monthlyDuty.duty.toFixed(2)+'</span>\
+                                    Duty Hour\
+                                </li>\
+                              </ul>
+                            </div>
+                                  
+                             </div>
+                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                              <label class="col-xs-12 col-sm-12" > Cash Collection and Due</label>
+                              
+                            <div class="form-group col-xs-4 col-sm-4">
+                              <button onclick="subcashcollection()" class="btn btn-primary ">Cash & Due</button>
+                            </div>
+                            <div id="cashdue" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                              
+                                <ul class="list-group">
+                                    <li class="list-group-item active ">
+                                      <span style="font-size: medium;" class="badge">&#8377;  0.00</span>
+                                      Total Cash Collection
+                                    </li>
+                                    <li class=" list-group-item list-group-item-info ">
+                                        <span class="badge">&#8377;  0.00</span>
+                                        Previous Due
+                                      </li>
+                                      <li class=" list-group-item list-group-item-info ">
+                                        <span class="badge">&#8377;  dailyCollection</span>
+                                        Today's Collcetion
+                                      </li>
+                                  </ul>
+
+                                  <ul class="list-group">
+                                    <li class="list-group-item active ">
+                                      <span style="font-size: medium; " class="badge">&#8377; 0.00 </span>
+                                      Fule Consumption
+                                    </li>
+                                    <li class=" list-group-item list-group-item-info ">
+                                        <span class="badge">&#8377; 0.00</span>
+                                        Pending Consumption
+                                      </li>
+                                    <li class=" list-group-item list-group-item-info ">
+                                        <span class="badge">&#8377; 0.00</span>
+                                        Today's KM Run 45KM<br>
+                                        Fl Price :&#8377;   Milege:                                           
+                                      </li>
+                                </ul>                                               
+                                                                             
+                                      <input type="hidden" name="payAmount" class="form-control" value="" >                       
+                                      <input type="hidden" name="CustID" value="">
+                                      <input type="hidden" name="typeOfReqest" value="preDriverDeposit">                  
+                                     <button type="submit" class="btn btn-success btn-block col-xs-12 col-sm-12">Due Amount &#8377;  Math.abs(1)</button> 
+                                 
+                                                 
+                             </div>
+                
+                             
+                
+                             
+                                  
+                         </div>
+                               
+                            </div>
+                           </div>
+                           
+                           
+                        </div>                      
+                    </div>
+              </div>
+              
+        
+          </div>
+        </div>
+            
+              
+             
+        
+        <script src="/admin/india/subAdmin.js"></script>
+        <!-- jQuery -->
+        <script src="/index/javascripts/sidebar.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+https://thisdavej.com/node-js-playing-sounds-to-provide-notifications/
+
+
+
+int SDK_INT = android.os.Build.VERSION.SDK_INT;
+    if (SDK_INT > 16) {
+        engine.getSettings().setMediaPlaybackRequiresUserGesture(false);
+    }

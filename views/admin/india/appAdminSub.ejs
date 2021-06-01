@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sub Admin</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/index/stylesheets/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="/index/stylesheets/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="/admin/india/subAdmin.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <script src="/admin/india/subAdmin.js"></script>
+
+    
+
+  </head>
+  <body>
+    <nav class="navbar navbar-def navbar-fixed-top">
+      <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../">
+                  <img style="margin-top: -10px;" alt="brand" src="/index/images/logo/paalogo.png" width="100" height="40">
+              </a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+              <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="../admin/sub"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a></li>
+
+                  <li><a href="../admin/sub/dutyhours"><i class="fa fa-rocket" aria-hidden="true"></i>Driver</a></li>
+
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
+
+  <div id="sidebar-waper">
+    <div class="togle-btn" onclick="sidebartoggle()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <ul class="sidebar-menue">
+        <li class="Dashboard">
+            <a href="../admin/sub"> <i class="fa fa-dashboard" aria-hidden="true"></i><span> Dashboard</span></a>
+        </li>
+       
+        <li class="Driver">
+            <a href="#ProfileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fa fa-cogs"></i>
+                <span>Pre Ride Driver</span>
+            </a>
+            <ul class="collapse" id="ProfileSubmenu">
+                <li onclick="findDriverInit()"><a href="#">Find Driver</a></li>
+                <li><a href="../admin/sub/dutyhours">Driver Details</a></li>
+                <li><a href="../admin/sub/monitor">Monitor</a></li>
+                
+                <li onclick="activeDriver(1,50)"><a href="#">Active Drivers</a></li>
+                <li onclick="dailyVerificationInit()"><a href="#">Daily Verification</a></li>
+                <li onclick="driverResetInit()"><a href="#">Driver Reseter</a></li>
+                <li onclick="changeMobileNoInit()"><a href="#">Change Mobile No</a></li>
+
+                
+
+
+
+            </ul>
+        </li>
+        <li class="tdriver">
+          <a href="#tdriverSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+              <i class="fa fa-cogs"></i>
+              <span>T-Ride Driver</span>
+          </a>
+          <ul class="collapse" id="tdriverSubmenu">
+              <li onclick="tDriverMonitor()"><a href="#">Online T Drivers</a></li>
+              
+
+
+
+          </ul>
+      </li>
+      <li class="customer">
+        <a href="#customerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fa fa-cogs"></i>
+            <span>Customer</span>
+        </a>
+        <ul class="collapse" id="customerSubmenu">
+            <li onclick="FindCustomerInit()" class="Refresh">
+                <a href="#"> <span> Find Customer</span></a>
+            </li>
+        <li onclick="dailyResolveCustInit()" class="newCust">
+            <a href="#"> <span> Daily Resolve Cust</span></a>
+        </li>
+        <li onclick="newCustome()" class="newCust">
+            <a href="#"> <span> New Customer</span></a>
+        </li>
+        <li onclick="totalnewCustome()" class="newCust">
+            <a href="#"> <span>Total New Customer</span></a>
+        </li>
+        <li onclick="totalCustomer()" class="Logout">
+            <a href="#"> <span> Total Customer</span></a>
+        </li>
+        <li onclick="refreshDemand()" class="Refresh">
+            <a href=""> <span> Demand Refresh</span></a>
+        </li>
+        </ul>
+    </li>
+    <li onclick="bookingManager()" class="Dashboard">
+        <a href="#"> <i class="fa fa-dashboard" aria-hidden="true"></i><span> Booking Manager</span></a>
+    </li>
+    <li onclick="demandDetailsInit()" class="Dashboard">
+        <a href="#"> <i class="fa fa-dashboard" aria-hidden="true"></i><span> Demand Call Details</span></a>
+    </li>
+        
+        <li onclick="whatsappmsginit()" class="abc">
+          <a href="#">
+            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+            <span>Whats App Msg</span></a>
+      </li>
+        <li class="Logout">
+            <a href="/india/admin/sub/logout"> <span> Logout</span></a>
+        </li>
+    </ul>
+</div>
+
+<div id="main-content">
+    <div id="zooppic" style="background-color: cadetblue; display: none;" class="container">
+  
+    </div>
+  <div  id="content-1" class="row">
+      
+      <!-- <div class="container">
+          <div class="panel panel-success">
+                <div class="panel-heading">
+                      <h3 class="panel-title">T-Ride Monitor  [ 12 ] 
+                          <span><button type="button" class="btn btn-warning">Drop All</button></span>
+                          <span><button style="float: right; color: rgb(199, 241, 8);" type="button" class="btn btn-danger">X</button></span>
+                      </h3>
+                </div>
+                <div id="TdriverList" class="panel-body">
+                      <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                          <div  class="thumbnail text-center">
+                              <img style="width: 60px; height: 60px;" src="/india/images/tracking.png" alt="">
+                              <div class="caption">
+                                  <p> Driver ID: 1000<br>+91 8509239522</p>
+                                  <p><img style="width: 50px; height: 20px;" src="/india/images/DriverMarker1.png"></p>
+                                  <p>
+                                      <a onclick="" href="#" class="btn btn-primary btn-xs">Drop</a>
+                                      <a onclick="" href="#" class="btn btn-primary btn-xs">Details</a>
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+                      
+                </div>
+          </div>
+      </div> -->
+      
+        <!-- <div style="margin-top: 50px;" class="col-sm-10 col-sm-offset-1  col-xs-10 col-xs-offset-1 ">
+            <div class="panel panel-primary">
+                  <div class="panel-heading">
+                        <h3 class="panel-title">Daily Driver Verification</h3>
+                  </div>
+                  <div id="verificationList" class="panel-body">
+                            
+                            
+                            
+                            
+                  </div>
+            </div>
+        </div> -->
+  </div> <!-- content-1 -->
+
+  <div  id="content-2" class="container">
+    <div style="margin-top: 20px; " class="row">
+        <div id="dailyFulePrice"  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="panel panel-success">
+                  <div class="panel-heading">
+                        <h3 class="panel-title">Daily Fuel Price 
+                        <button onclick="addnewFuelprise()" type="button" class="btn btn-xs btn-success">Add New</button>
+                        </h3>
+                  </div>
+                  <div id="cityFuelPrice" style="height: 30vh; overflow-y: auto;" class="panel-body">
+                    <!-- <ul class="list-group">
+                            <li class="list-group-item active">
+                                <span class="badge">Kolkata</span>
+                                City : <span><button onclick="dtls()" type="button" class="btn btn-xs btn-warning">Update</button></span>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">&#8377; 5</span>
+                                Petrol/Ltr
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">&#8377; 10</span>
+                                Desiel/Ltr
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">&#8377; 15</span>
+                                CNG/kg
+                            </li>
+                        </ul> -->
+                  </div>
+            </div>
+        </div>
+        <div  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="panel panel-success">
+                <div   class="panel-heading">
+                      <h3  class="panel-title"> New Driver Register <span id="newDriveCount" class="badge">0</span></h3>    
+                </div>
+                <div  id="newDriverRegList" style="height: 30vh; overflow-y: auto;" class="panel-body">
+                    <!-- <ul class="list-group">
+                        <li class="list-group-item active">
+                            <span style="color: red;" class="badge">X</span>
+                            <span class="badge">New</span>
+                            Sukanta Sardar
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge"><i class="fa fa-whatsapp" aria-hidden="true"></i></span>
+                            M:8509239522, <br>Date: 2021-03-25T18:31:23.896Z, <br>email: sukanta.uk@gmail.com
+                        </li>
+                    </ul> -->
+                    
+                      
+                      
+                </div>
+          </div>
+        </div>
+        <div  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                      <h3 class="panel-title">New Customer Register <span id="newCustomerCount" class="badge">0</span></h3>
+                </div>
+                <div id="newCustList" style="height: 30vh; overflow-y: auto;" class="panel-body">
+                      <!-- <ul class="list-group">
+                          <li class="list-group-item active">
+                            <span style="color: red;" class="badge">X</span>
+                              <span class="badge">Kolkata</span>
+                              Sukanta Sardar
+                          </li>
+                          <li class="list-group-item">
+                            <span class="badge"><i class="fa fa-whatsapp" aria-hidden="true"></i></span>
+                              M:8509239522, <br>Date: 2021-03-25T18:31:23.896Z
+                          </li>
+                      </ul> -->
+                      
+                      
+                </div>
+          </div>
+        </div>
+
+    </div>
+    
+    <div class="row">
+        <div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                      <h3 class="panel-title">Customer Chat / Feedback</h3>
+                </div>
+                <div id="newCustList" style="height: 30vh; overflow-y: auto;" class="panel-body">
+                      <!-- <ul class="list-group">
+                          <li class="list-group-item active">
+                            <span style="color: red;" class="badge">X</span>
+                              <span class="badge">Kolkata</span>
+                              Sukanta Sardar
+                          </li>
+                          <li class="list-group-item">
+                            <span class="badge"><i class="fa fa-whatsapp" aria-hidden="true"></i></span>
+                              M:8509239522, <br>Date: 2021-03-25T18:31:23.896Z
+                          </li>
+                      </ul> -->
+                      
+                      
+                </div>
+          </div>
+        </div>
+        <div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                      <h3 class="panel-title">Driver Chat / Feedback <span id="newCustomerCount" class="badge">0</span></h3>
+                </div>
+                <div id="newCustList" style="height: 30vh; overflow-y: auto;" class="panel-body">
+                      <!-- <ul class="list-group">
+                          <li class="list-group-item active">
+                            <span style="color: red;" class="badge">X</span>
+                              <span class="badge">Kolkata</span>
+                              Sukanta Sardar
+                          </li>
+                          <li class="list-group-item">
+                            <span class="badge"><i class="fa fa-whatsapp" aria-hidden="true"></i></span>
+                              M:8509239522, <br>Date: 2021-03-25T18:31:23.896Z
+                          </li>
+                      </ul> -->
+                      
+                      
+                </div>
+          </div>
+        </div>
+    </div>
+    
+    
+</div> <!-- content-2 -->
+
+  <script>
+    findDriver('<%=driverMobile%>');
+    fulePriceList();
+    getNewDriveRegisterlist();
+    getNewCustRegList();
+ </script>
+
+</div>  
+<!-- End main Content -->
+
+
+<!-- <% if(driverMobile){%>
+    <input type="hidden"  id="mobile" value="<%=driverMobile%>">
+   
+<%}%> -->
+
+    
+    
+    <!-- jQuery -->
+    <script src="/index/javascripts/sidebar.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+           
+    </head>
+    <body>
+      
+      <div class="container">
+        <h1 class="text-center">www.paacab.com</h1>
+          <div style="margin-top: 80%;" class="col-xs-4 col-ms-4 col-xs-offset-4 col-ms-offset-4">          
+          <button onclick="window.location='/drive'" type="button" class="btn btn-warning">Get Started</button>
+          
+          </div>
+      </div>
+
+        <script>
+            function initMap() {
+            function success(position) {
+              const latitude  = position.coords.latitude;
+              const longitude = position.coords.longitude;
+             // alert(latitude);
+              //console.log(position)
+              $.post('/geoplace',{lat:latitude,lng:longitude},function(data){
+                  console.log(data);
+                  if(data=='India'){
+                    ////////Redirect to India////                    
+                    $.post('/countrycode',{countryCode:"india"},function(data){
+                    window.location='/india/drv/login?lat='+latitude+'&lng='+longitude+'';
+                    })
+
+                  }else{
+                    if(data=='United Kingdom'){
+                         ////////Redirect to uk////
+                    $.post('/countrycode',{countryCode:"uk"},function(data){
+                    window.location='/uk/drv/login?lat='+latitude+'&lng='+longitude+'';
+                    })
+                         
+                     } else{
+                        // if(data=='Bangladesh'){
+                             /////// Redirect to Bangladesh////
+                    $.post('/countrycode',{countryCode:"bd"},function(data){
+                    window.location='/bd/drv/login?lat='+latitude+'&lng='+longitude+'';
+                    })
+                             
+                         //}
+                     }
+                      
+                  }
+
+                    // $.post('/countrycode',{countryCode:"india"},function(data){
+                    // window.location='/india/drv/login?lat='+latitude+'&lng='+longitude+'';
+                    // })
+                  
+                 
+              })
+            }
+            
+            function error() {
+              status.textContent = 'Unable to retrieve your location';
+            }
+            
+            if (!navigator.geolocation) {
+              status.textContent = 'Geolocation is not supported by your browser';
+            } else {
+              status.textContent = 'Locating…';
+              navigator.geolocation.getCurrentPosition(success, error);
+            }
+            
+            }
+            
+          
+            </script>
+
+              <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script async defer   
+    src="https://maps.googleapis.com/maps/api/js?key=<%=YOUR_API_KEY%>&callback=initMap">
+    </script>
+    </body>
+</html>

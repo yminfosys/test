@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+           
+    </head>
+    <body>
+      
+      <div class="container">
+        <h1 class="text-center">www.paacab.com</h1>
+          <div style="margin-top: 80%;" class="col-xs-4 col-ms-4 col-xs-offset-4 col-ms-offset-4">          
+          <button onclick="window.location='/timedrive'" type="button" class="btn btn-warning">Wait ..</button>
+          
+          </div>
+      </div>
+
+        <script> 
+        
+            function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+            }
+            }
+            return "";
+
+            }
+            function initMap() {
+              function success(position) {
+              const latitude  = position.coords.latitude;
+              const longitude = position.coords.longitude;
+             // alert(latitude);
+              //console.log(position)
+
+
+              $.post('/geoplace',{lat:latitude,lng:longitude},function(data){
+                  console.log(data);
+
+                  if(data=='India'){
+                    ////////Redirect to India////                    
+                    $.post('/countrycode',{countryCode:"india",lat:latitude,lng:longitude},function(data){
+                    window.location='/india/tdrv/login?lat='+latitude+'&lng='+longitude+'';
+                    })
+
+                  }else{
+                    if(data=='United Kingdom'){
+                         ////////Redirect to uk////
+                    // $.post('/countrycode',{countryCode:"uk"},function(data){
+                    // window.location='/uk/preDrv/login?lat='+latitude+'&lng='+longitude+'';
+
+                    $.post('/countrycode',{countryCode:"india", lat:latitude, lng:longitude},function(data){
+                    window.location='/india/tdrv/login?lat='+latitude+'&lng='+longitude+'';
+                    })
+                         
+                     } else{
+                        // if(data=='Bangladesh'){
+                             /////// Redirect to Bangladesh////
+                    $.post('/countrycode',{countryCode:"bd", lat:latitude, lng:longitude},function(data){
+                    window.location='/india/tdrv/login?lat='+latitude+'&lng='+longitude+'';
+                    })
+                             
+                         //}
+                     }
+                      
+                  }
+
+                    //  $.post('/countrycode',{countryCode:"india"},function(data){
+                    // window.location='/india/preDrv/login?lat='+latitude+'&lng='+longitude+'';
+                    // })
+              })
+            }
+            
+            function error() {
+              status.textContent = 'Unable to retrieve your location';
+            }
+            
+            if(getCookie("countryCode")){
+             
+                var cData=getCookie("countryCode")
+                //alert(cData)
+                if(cData=='india'){
+                    ////////Redirect to India////  
+                    window.location='/india/tdrv';
+                }else{
+                    if(cData=='uk'){
+                    ////////Redirect to India////  
+                    window.location='/india/tdrv';
+                    }else{
+                        if(cData=='bd'){
+                        ////////Redirect to India////  
+                        window.location='/india/tdrv';
+                        }
+                    } 
+                }
+                    
+            }else{
+                if (!navigator.geolocation) {
+                status.textContent = 'Geolocation is not supported by your browser';
+                } else {
+                status.textContent = 'Locating…';
+                navigator.geolocation.getCurrentPosition(success, error);
+                }
+            }
+                
+
+             }  //////END INTMAP          
+            
+           
+              
+          
+            </script>
+          
+
+              <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script async defer   
+    src="https://maps.googleapis.com/maps/api/js?key=<%=YOUR_API_KEY%>&callback=initMap">
+    </script>
+    </body>
+</html>

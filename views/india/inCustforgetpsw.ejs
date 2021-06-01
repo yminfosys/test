@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paa</title>
+
+        <link href="/india/images/logo/paaicon.png" rel="icon">
+        <link rel="stylesheet" type="text/css" href="/india/stylesheets/instyle.css" />
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="headernav">
+            <img src="/india/images/logo/paalogo.png">
+            <p class="text-center">Forget Password For India</p>
+        </div>        
+        <div class="from-content">
+            
+                <div class="row">
+                    <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                        <div id="reg-mob" class="form-group">
+                        <label class="control-label" for="mobile">Enter Register Mobile Number</label>
+                            <div class="input-group">                       
+                                <div class="input-group-addon">+91</div>                    
+                                <input id="mobile" name="mobile"  type="number" class="form-control" placeholder="Mobile Number">
+                            </div>                           
+                            <div id="reg-mob-btn" style="margin-top: 15px;" class="input-group">                                 
+                                <button onclick="checkmobileexist()" type="button" class="btn btn-primary">Reset Password</button>
+                            </div>
+                        </div>
+                        <div style="display: none;" id="reg-mob1" class="form-group">
+                            <div id="otp" class="input-group col-xs-4 col-sm-4">
+                                <label class="control-label" for="mobile">Enter OTP</label>
+                                <input id="fotp1" type="hidden">
+                                <input id="fotp" type="number" class="form-control" placeholder="4 Digit OTP">
+                            </div>
+                           
+
+                            <div id="pasw" class="input-group col-xs-12 col-sm-12">
+                                <label class="control-label" for="mobile">Set New Password</label>
+                                <input id="newpsw" type="password" class="form-control" placeholder="New Password">
+                            </div>
+                            <div id="reg-mob-btn" style="margin-top: 15px;" class="input-group">                                 
+                                <button onclick="submitnewpsw()" type="button" class="btn btn-primary">submit</button>
+                            </div>
+
+                    </div>
+                </div>
+        </div>            
+               
+<script>
+function checkmobileexist(){
+    var otp=randamNumber();
+    var mobile=$("#mobile").val();
+   $("#fotp1").val(otp);
+   $.post('/india/checkMobileExist',{mobile:mobile},function(data){
+            if(data=='exist'){
+               // alert(otp)
+   $.post('/india/otpSend',{mobile:mobile,otp:otp},function(data){                  
+        if(data.Status=='Success'){
+            $("#reg-mob").css({"display":"none"})
+            $("#reg-mob1").css({"display":"block"})
+       }
+    })
+         }else{
+             alert("Mobile Number Not Register")
+         }
+        });
+    
+}
+
+function submitnewpsw(){
+    var otp1=$("#fotp1").val();  
+    var otp=$("#fotp").val(); 
+    var mobile=$("#mobile").val();
+    var password=$("#newpsw").val().trim();
+    if(otp1==otp){
+        $.post('/india/setnewpassword',{mobile:mobile,password:password},function(data){
+            if(data=="Success"){
+                alert("password Change Successfully");
+                window.location.href="../india/login";
+            }
+        });
+    }else{
+        alert("OTP Not Match");
+    }
+}
+
+////Randanm OTP/////////
+function randamNumber(){
+    var tex="";
+    for(var i=0; i < 4; i++){
+        tex+=''+Math.floor(Math.random() * 10)+'';    
+    }
+    return tex;
+
+}
+</script>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

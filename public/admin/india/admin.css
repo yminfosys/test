@@ -1,0 +1,3 @@
+#newCust{position: fixed; top: 0px; background-color: cadetblue; height: 100vh; display: none;}
+#newCustList{ height: 90vh; overflow: scroll;}
+.closeBtn{margin-top: 55px; float: right;}

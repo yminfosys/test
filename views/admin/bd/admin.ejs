@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paacab</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/index/stylesheets/sidebar.css" />
+        <link rel="stylesheet" type="text/css" href="/index/stylesheets/navbar.css" />
+        <link rel="stylesheet" type="text/css" href="/admin/bd/admin.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="/admin/bd/adminjs.js"></script>
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-def navbar-fixed-top">
+            <div class="container-fluid ">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../">
+                        <img style="margin-top: -10px;" alt="brand" src="/index/images/logo/paalogo.png" width="100" height="40">
+                  </a>
+              </div>
+          
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="../bd/admin"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="../bd/admin" ><i class="fa fa-amazon" aria-hidden="true"></i> Add Sub Admin</a></li>
+                    
+                  
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        <div id="sidebar-waper">
+            <div class="togle-btn" onclick="sidebartoggle()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="sidebar-menue">
+            <li class="Dashboard"><a href="../bd/admin"> <i class="fa fa-dashboard" aria-hidden="true"></i><span> Dashboard</span></a></li>
+            <li class="Profile">
+              <a href="#ProfileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                  <i class="fa fa-cogs"></i>
+                  <span>Menu</span>
+              </a>
+              <ul class="collapse " id="ProfileSubmenu">
+                  <li><a href="#" onclick="cityandpriceUpdate()">City And Price Add</a></li>
+                  <li><a href="#" onclick="driverWithdral()">Driver Withdral Requiest</a></li>
+              </ul>
+            </li>
+            <li class="Logout"><a href="/bd/admin/logout"> <span> Logout</span></a></li>
+            </ul>
+        </div>
+        
+        <div id="main-content"> 
+            <div class="container">                
+                <div class="row" id="addnewCity">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <form action="/bd/admin/addnewPrice" method="POST" id="addnewcity" class="form-inline" role="form">                    
+                            <div class="form-group" style="width: 25%;">
+                                <label>City / Distric</label><br>                                                
+                                <select name="city" id="a1" class="form-control">
+                                    <option  value="Kolkata">Kolkata</option >
+                                    <option value="Bardhaman">Bardhaman</option>
+                                    <option value="South 24 Parganas">South 24 Parganas</option>
+                                    <option value="Howrah">Howrah</option>
+                                    <option value="North 24 Parganas">North 24 Parganas</option>
+                                    <option value="Greater London">Greater London</option>
+                                    <option value="Dhaka Division">Dhaka District</option>
+
+                                    
+                                </select>
+                            </div>
+                           
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>Per KM General Price</label>                                                  
+                                <input class="form-control" name="kmprice" type="text">
+                            </div>
+                            <div class="form-group" style="width: 25%;">  
+                                <label>Per KM Pre Ride Price</label>                                                
+                                <input class="form-control" name="preRidekmprice" type="text">
+                            </div>
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>General Minimum Price</label>                                                 
+                                <input class="form-control" name="minimumprice" type="text">
+                            </div>
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>General Minimum Km</label>                                               
+                                <input class="form-control" name="minimumkm" type="text">
+                            </div>
+
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>Travael Mode</label>                                               
+                                <input class="form-control" name="travelmode" type="text">
+                            </div>
+
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>Ride Incentive</label>                                               
+                                <input class="form-control" name="incentive" type="text">
+                            </div>
+
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>Driverpayout </label>                                               
+                                <input class="form-control" name="driverpayout" type="text">
+                            </div>
+
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>General Base Price </label> <br>                                              
+                                <input class="form-control" name="basePrice" type="text">
+                            </div>
+
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>Pre Ride Per Munite Charge </label> <br>                                              
+                                <input class="form-control" name="preRidePerminuteCharge" type="text">
+                            </div>
+
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>General Per Munite Charge </label> <br>                                              
+                                <input class="form-control" name="gneralPreMuniteCharge" type="text">
+                            </div>
+
+                            
+
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>Share Ride </label>   <br>                                            
+                                <select name="shareride" class="form-control">
+                                    <option value="0">NO</option>
+                                        <option value="1">YES</option>
+                                        
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" style="width: 25%;"> 
+                                <label>Passenger Capacity </label> <br>                                              
+                                <input class="form-control" name="passengerCapacity" type="text">
+                            </div>
+                                
+                            <div class="form-group" style="width: 25%; margin-top: 20px;"> 
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                     
+                        </form>
+                </div>
+
+                
+                <div class="row" id="CityList">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table id="tablecontent" class="table table-responsive table-striped"> </table>  
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+
+        </div>
+         
+         <div  class="container">
+             
+             <div class="row">
+                 <div id="withdral" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+                    <!-- <ul class="list-group">
+                        <li class="list-group-item active ">
+                          <span style="font-size: medium; " class="badge">&#8377; 100 </span>
+                          Withdrawl Request
+                        </li>
+                        <li class=" list-group-item list-group-item-info ">
+                            <span class="badge text-success ">Initiate</span>
+                             <span class="badge">txnID:1020</span>
+                            Status <br>
+                            Date:<%=new Date().toISOString().replace('T', ' ').substr(0, 10)%><br>
+                           
+                            Name: Sukanta Sardar<br>
+                            A/c : 1232455 IFSC: 4525lkj                            
+                            <button onclick="completeWithdral(1020)" type="button" class="btn btn-success">Complete</button>                          
+                            
+                          </li>
+                    </ul>      -->
+                 </div>
+             </div>
+             
+             
+         </div>
+         
+
+     </div>
+        
+        
+        <!-- jQuery -->
+        <script src="/index/javascripts/sidebar.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,240 @@
+#heder-content{position: fixed;
+    height: 7vh;
+    top: 0;
+    width: 100%; 
+    border-bottom:1px solid orangered;
+    border: 0;
+	  box-sizing: border-box;
+	  margin: 0;
+    padding: 0;
+    background: #575757;
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+	overflow: hidden;
+  }
+  :root {
+    font-size: calc(48px + (60 - 48)*(100vw - 320px)/(1024 - 320));
+  }
+
+  #heder-content input{
+    color: #fff;
+	font: 1em "Helvetica Neue", Helvetica, sans-serif;
+	line-height: 1.5;
+  }
+
+
+  .toggle, .toggle:before, .slot__label, .curtain {
+    transition-property: background-color, transform, visibility;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in, cubic-bezier(0.6,0.2,0.4,1.5), linear;
+  }
+  .toggle:before, .slot, .slot__label {
+    display: block;
+  }
+  .toggle:before, .curtain {
+    position: absolute;
+  }
+  .toggle:checked, .curtain {
+    background-color: #2b7f3a;
+  }
+  .toggle:focus {
+    outline: transparent;
+  }
+  .toggle {
+    border-radius: 0.75em;
+    box-shadow: 0 0 0 0.1em inset;
+    cursor: pointer;
+    position: relative;
+    margin-right: 0.25em;
+    width: 3em;
+    height: 1.5em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .toggle:before {
+    background: currentColor;
+    border-radius: 50%;
+    content: "";
+    top: 0.2em;
+    left: 0.2em;
+    width: 1.1em;
+    height: 1.1em;
+  }
+  .toggle:checked:before {
+    transform: translateX(1.5em);
+  }
+  .toggle:checked ~ .slot .slot__label, .slot__label:nth-child(2) {
+    transform: translateY(-50%) scaleY(0);
+  }
+  .toggle:checked ~ .slot .slot__label:nth-child(2) {
+    transform: translateY(-100%) scaleY(1);
+  }
+  .toggle:checked ~ .curtain {
+    transform: scaleX(1);
+  }
+  .slot {
+    color: transparent;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    overflow: hidden;
+    height: 1em;
+    text-indent: -0.9em;
+    -webkit-text-stroke: 0.05em #fff;
+  }
+  .slot__label {
+    transform-origin: 50% 0;
+  }
+  .slot__label:nth-child(2) {
+    transform-origin: 50% 100%;
+  }
+  .curtain {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    z-index: -1;
+  }
+
+
+
+#mapcontent{position: fixed;
+    height: 23vh;
+    top: 75vh;
+    width: 100%; 
+    
+  }
+  #map {
+    height: 100%;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: none;
+   }
+
+   #nofofride{
+    position: fixed;
+    height: 63vh;
+    top: 7vh;
+    width: 100%;    
+    display: none;
+   }
+
+   .rideList{
+     border: 1px solid #000;
+     border-radius: 5px; padding: 5px;
+     height: 63vh;
+     overflow-y: scroll;
+   }
+   .prerideName{font-size: 12px; font-weight: bold;}
+   .prerideads{margin-top: -10px;}
+   .pickupPreridebtn{border:1px solid rgb(71, 7, 7) ;
+    color: #facb3d; padding: 5px;background-color: #1c201d; border-radius: 5px;
+    text-align: center; width:100%;}
+    .pickupPreridebtn1{border:1px solid rgb(71, 7, 7) ;
+      color: #facb3d; padding: 5px;background-color: #1c201d; border-radius: 5px;
+      text-align: center; width:100%;display: none;}
+   
+   .mybtn{font-size: 20px; margin-top: 5px; margin-bottom: 4px;}
+   .listItem{ border-bottom: 1px solid rgb(49, 47, 47); padding-bottom: 5px;}
+   .telmsg{margin-top: 5px;}
+
+   .OrderCancelTimer{display: none;}
+   .timeDisplay{background-color: rgb(199, 212, 12); border: 3px solid rgb(18, 3, 85);
+    border-radius: 20%; height: 40px;}
+    .timeDisplay p{ text-align: center; font-size: 20px; font-weight: bolder; margin-top: 5px;}
+    .timeBtn{
+      display: none;
+    }
+
+   #Offline{
+    position: fixed;
+    height: 93vh;
+    top: 7vh;
+    width: 100%;
+    background-color: antiquewhite;
+    
+
+   }
+   #offline-content{
+     position: fixed;
+    width: 50%; height: 10%; margin-top: 45%; 
+    margin-left: 25%; text-align: center; 
+    font-size: 22px;
+    color: red;
+  }
+
+  #OTP-Content{
+    position: fixed;
+    height: 63vh;
+    top: 7vh;
+    width: 100%;  
+    z-index: 100;
+    background-color: #213328; 
+    text-align: center; 
+    color: #facb3d;
+    color: #df0d0d;
+    display:none;
+    
+  }
+  #OTP-Content input{ text-align: center; font-size: 25px; letter-spacing: 10px; width: 150px;  color: #575757; }
+
+
+  *{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+#billAndfeedback{ position: fixed; width: 100%; height: 100vh; background-color: #eeebea;
+   z-index: 100; 
+   display: none;
+  }
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:rgb(109, 100, 100);
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #fffb00;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #fffb00;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #fffb00;
+}
+
+
+
+
+
+
+
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Passenger</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/bd/stylesheets/instyle.css" />
+        <link rel="stylesheet" type="text/css" href="/index/stylesheets/sidebar.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="/index/javascripts/socket.io.js"></script>
+        <script src="/bd/javascripts/inCustMapjs.js"></script>
+        <script src="/bd/javascripts/inCustjs.js"></script>
+        <script src="/index/javascripts/sidebar.js"></script>
+        
+       
+    </head>
+    <body>
+        <div id="sidebar-waper">
+            <div class="togle-btn" onclick="sidebartoggle()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+
+            <ul class="sidebar-menue">
+            <li class="Dashboard" style="border-bottom: 1px solid #FFF;">
+                <div style="font-size: 25px; text-align: center;"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
+                <div class="text-center"><%=cust.name%><br><%=cust.isdCode%><%=cust.mobileNumber%></div>
+                
+            </li>
+            <li class="Recharge">
+              <a href="#RechargeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
+                  <span>Recharge</span>
+              </a>
+              <ul class="collapse " id="RechargeSubmenu">
+                  <li onclick="walletReg()"><a href="#">Wallet Recharge </a></li>
+                  <li><a href="#">Buy Km</a></li>
+                  
+                  </ul>
+            </li>
+
+            <li class="Myrides">
+                <a href="#MyridesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa fa-taxi" aria-hidden="true"></i>
+                    <span>My Rides</span>
+                </a>
+                <ul class="collapse " id="MyridesSubmenu">
+                    <li><a href="#">My Rides </a></li>
+                    <li><a href="#">Invoice</a></li>
+                    
+                    </ul>
+              </li>
+
+              <li class="freekm"><a href="#">                
+                <i class="fa fa-gift" aria-hidden="true"></i>
+                  <span>Earn Free Km</span>
+                  </a>
+              </li>
+
+              <li class="Notification"><a href="#">                
+                <i class="fa fa-bell" aria-hidden="true"></i>
+                  <span>Notification</span>
+                  </a>
+              </li>
+
+            <li class="Logout">
+                <a href="/bd/logout/cust">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                     <span> Logout</span>
+                    </a>
+            </li>
+            </ul>
+        </div>
+        
+        <div id="main-content">
+            <!-- Search Place from map      -->
+        <div id="placesearch">                           
+            <span id="closall" onclick="CloseAll('placesearch')">Back </span>
+            <form action="" method="POST" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                            <input onkeydown="searchdown()"  onkeyup="searchup()" type="text" class="form-control" id="searchPlace" placeholder="Search Address" >
+                            <img class="searchGif" src="/bd/images/gif/378.gif">
+                            <input type="hidden" id="searchMode">
+                            
+                        </div>
+                    </div>
+                    
+                    <div id="placeList" class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 list-group">
+                            
+                        <a onclick="CloseAll('placesearch')"  class="list-group-item active"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; OK Select From Map</a>
+                        
+                    </div>
+
+               </form>
+               
+    </div>
+    <!-- End Search Place from map      -->
+            <div id="mapcontent">
+                <div id="map"></div>
+                <div id="notification">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                </div>
+                <div id="content-pickup">
+                    Pickup Location
+                </div>
+                <div id="promoMsg" >
+                   <marquee>hghfhf</marquee>
+                 </div>
+                <div id="content-drop">
+                    Pickup Location
+                </div>
+            </div>
+
+            <div id="footer">
+
+                <div id="booking-process">                       
+                    <div class="row">
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                         <img style="width: 100%;" src="/bd/images/gif/circle1.gif">
+                         <p class="text-center red"> Call is connecting to Driver</p>  
+                        </div>
+                    </div>
+                </div>
+                
+            
+                    <div  id="traval-mod">
+                        <div id="traval-mod-item">
+                            <div id="timee1" class="modeContenttime"></div>
+                            <span id="gif1" class="modeContenwait "><img src="/bd/images/paadot.gif"></span>
+                            <img onclick="changeModeofTravel(1)" id="modeImg1" class="modeImg img-circle" src="/bd/images/tm1.png">
+                            <div id="tm1" class="modeContentprice">120</div>
+                            <input id="tmPrice1" type="hidden">
+                            <input id="tmPreRidePrice1" type="hidden">
+                            <input id="tmShareRide1" type="hidden">
+                        </div>
+
+                        <div id="traval-mod-item">
+                            <div id="timee2" class="modeContenttime">12 min</div>
+                            <span id="gif2" class="modeContenwait"><img src="/bd/images/paadot.gif"></span>
+                            <img onclick="changeModeofTravel(2)" id="modeImg2" class="modeImg img-circle" src="/bd/images/tm2.png">
+                            <div id="tm2" class="modeContentprice">120</div>
+                            <input id="tmPrice2" type="hidden">
+                            <input id="tmPreRidePrice2" type="hidden">
+                            <input id="tmShareRide2" type="hidden">
+                        </div>
+
+                        <div id="traval-mod-item">
+                            <div id="timee3" class="modeContenttime">12 min</div>
+                            <span id="gif3" class="modeContenwait"><img src="/bd/images/paadot.gif"></span>
+                            <img onclick="changeModeofTravel(3)" id="modeImg3" class="modeImg img-circle" src="/bd/images/tm3.png">
+                            <div id="tm3" class="modeContentprice">120</div>
+                            <input id="tmPrice3" type="hidden">
+                            <input id="tmPreRidePrice3" type="hidden">
+                            <input id="tmShareRide3" type="hidden">
+                          
+
+                        </div>
+
+                        <div id="traval-mod-item">
+                            <div id="timee4" class="modeContenttime">12 min</div>
+                            <span id="gif4" class="modeContenwait"><img src="/bd/images/paadot.gif"></span>
+                            <img onclick="changeModeofTravel(4)" id="modeImg4" class="modeImg img-circle" src="/bd/images/tm4.png">
+                            <div id="tm4" class="modeContentprice">120</div>
+                            <input id="tmPrice4" type="hidden">
+                            <input id="tmPreRidePrice4" type="hidden">
+                            <input id="tmShareRide4" type="hidden">
+                           
+                        </div>
+
+                       
+                        
+                    </div>
+                    <!-- Session Declare -->
+                    <input name="ModeofTravel" id="ModeofTravel" type="hidden" value="1">
+                    <input name="ModeofSearch" id="ModeofSearch" type="hidden" value="0">
+                    <input  id="totalDistance" type="hidden"> 
+
+                   <div  id="footer-content" >                       
+                       <div class="row">
+                           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                            <div class="form-group">
+                               
+                                    <input name="picuplocation"  onclick="pickupsearch(1)" type="text" class="form-control" id="picuplocation" placeholder="Pick up Address" readonly>
+                                   
+                            </div> 
+                           </div>
+
+                           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                            <div class="form-group">
+                                
+                                    <input name="droplocation" onclick="pickupsearch(2)" type="text" class="form-control" id="droplocation" placeholder="Drop Adderss" readonly>
+                     
+                            </div>
+                           </div>
+                           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                            <div class="form-group">                               
+                               
+                               <button id="naxtBtn" type="button" class="btn btn-large btn-block btn-primary">Continue</button>
+                                    
+                     
+                            </div>
+                           </div>
+                       </div>
+                    </div> <!--End Footer-content -->
+
+                   <div  id="footer-prebooking" class="container">   
+                    <div class="col-xs-12 col-sm-12  ">
+                        <div style="border-bottom: 1px solid #000; " class="row">
+                            <!-- <div id="booimg" class="col-xs-2 col-sm-3 col-md-3 col-lg-2">
+                            <img class="img-rounded" src="/bd/images/tm1.png" width="100">
+                            </div> -->
+                            
+                            <!-- <div class="col-xs-3 col-sm-3 ">
+                                <label style="position: relative; float: left; font-size: 18px;">&#2547;</label> 
+                                <div style="position: relative; float: left; font-size: 18px; letter-spacing:0px;" id="totalAmt">20</div> 
+                                                           
+                            </div> -->
+                            
+                            <!-- <div class="col-xs-7 col-sm-7">
+                               <p id="preRidecontent" style="font-size: 12px; color: rgb(23, 100, 21); font-weight: bolder;"></p>
+                            </div> -->
+
+                        </div>
+
+                        <div style="border-bottom: 1px solid #000; height: 25%;" class="row">
+                      
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="checkbox" style="font-size: 12px;">
+                                    <label>
+                                        <input id="payBycash" type="checkbox" value="">
+                                        Cash
+                                    </label>
+                                </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">                           
+                            <%if(cust.BuyKM){%>
+                                <p style="margin-top: 10px; cursor: pointer; font-size: 12px;"> BuyKM &#2547;(<%= Number(cust.BuyKM)%>)</p>
+                                <input type="hidden" id="buyKM" value="<%= Number(cust.BuyKM)%>">
+                                <%}else{%>
+                                    <p style="margin-top: 10px; cursor: pointer; font-size: 12px;">BuyKM :0</p>
+                                    <input type="hidden" id="buyKM" value="0">
+                                 <%}%>
+                        </div>
+                            <div class="col-xs-5 col-sm-4 col-md-5 col-lg-5">
+                                <%if(cust.walletBalance){%>
+                            <p onclick="walletReg()" style="margin-top: 10px; cursor: pointer; font-size: 12px;"> Wallet &#2547;(<%= Number(cust.walletBalance)%>)</p>
+                            <input type="hidden" id="walletBalance" value="<%= Number(cust.walletBalance)%>">
+                                <%}else{%>
+                                    <p onclick="walletReg()" style="margin-top: 10px; cursor: pointer; font-size: 12px;"> Wallet &#2547;0.00</p>
+                                    <input type="hidden" id="walletBalance" value="0">
+
+                                <%}%>
+                        </div>
+                        </div>
+
+                        <div style=" margin-top: 5px;" class="row">
+                        <div id="bookingMsg" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button  onclick="confirmBooking()" id="confrmBtn" type="button" class="btn  btn-primary col-xs-6 col-sm-6">Confirm PaaCab</button>
+                            <button  onclick="preRideBooking()" id="preRideBtn" type="button" class="btn  btn-success col-xs-6 col-sm-6">Pre-Ride &#2547; 36</button>
+                            <button  onclick="shareRideBooking()" id="shareRideBtn" type="button" class="btn  btn-warning col-xs-12 col-sm-12" style="margin-top: 5px;">Share-Ride &#2547; 25</button>
+                        
+                        
+                        </div>
+                        </div></div>
+                   </div>
+                   
+                   <div id="waletPayment" >
+                    <div style="text-align: center; margin-top: 15vh;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <%if(cust.walletBalance){%>
+                            <p id="preRideAmt">Wallet Balance &#2547; <%= Number(cust.walletBalance)%></p>
+                        <%}else{%>
+                            <p id="preRideAmt">Wallet Balance &#2547; 0.00</p>
+                        <%}%>
+                        <form action="/bd/pay" method="POST" class="form-inline" role="form">
+                        <div class="form-group">
+                         <label>Recharge Amount (&#2547;)</label>   
+                         <input style="font-size: 25px;" type="number" name="payAmount" class="form-control" placeholder="Recharge Amount" >                       
+                         <input type="hidden" name="CustID" value="<%=cust.CustID%>">
+                         <input type="hidden" name="typeOfReqest" value="wallet">
+                        </div>                        
+                        <div class="form-group">
+                            
+                            <input type="submit" value="Recharge" class="btn btn-primary col-xs-12 col-sm-12 ">
+                        </div>
+                        </form>
+                    </div>
+                   </div>
+                   
+                   
+                   <div  id="footer-preRide" class="container">                        
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div id="preRideAmount">Pre-Ride &#2547; </div>
+                                <div class="form-group">
+                                <select id="preRideType" class="form-control">
+                                    <option value="1">Start Ride with in 30 min</option>                                   
+                                    <option value="3">Buy km for Month</option>                                    
+                                </select>
+                            </div>
+                                
+                                <div class="form-group" id="prerideCnfBtn">
+                                    <button id="conframPreridebtn" onclick="conframPreride()" type="button" class="btn btn-primary col-xs-12 col-sm-12 ">Confrim Paacab</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="preridesBackbtn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <br>
+                                <button onclick="backPreride()" type="button" class="btn btn-primary col-xs-12 col-sm-12 ">Back</button> 
+                            </div>
+                        </div>
+
+                        
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div id="prebooking-process">                       
+                                    <div class="row">
+                                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                                         <img style="width: 100%;" src="/bd/images/gif/circle1.gif">
+                                         <p class="text-center red"> Call is connecting to Driver</p>  
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        
+                   </div>
+                 
+                    
+            </div>
+              
+        </div>    
+        <!-- jQuery -->
+        <script>
+         AlldrivingModeNearestTime();
+        </script>
+        
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script async defer   
+        src="https://maps.googleapis.com/maps/api/js?key=<%=YOUR_API_KEY%>&callback=initMap">
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+

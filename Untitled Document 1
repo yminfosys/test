@@ -1,0 +1,120 @@
+City Name {"access_points":[],"address_components":
+[{"long_name":"Unnamed Road","short_name":"Unnamed Road","types":["route"]},
+
+{"long_name":"Barguna District","short_name":"Barguna District",
+
+"types":["administrative_area_level_2","political"]},
+{"long_name":"Barisal Division","short_name":"Barisal Division",
+
+"types":["administrative_area_level_1","political"]},
+{"long_name":"Bangladesh","short_name":"BD","types":["country","political"]}],
+
+"formatted_address":"Unnamed Road, Bangladesh","geometry":{"bounds":{"northeast":{"lat":22.0958951,"lng":90.1132439},"southwest":{"lat":22.0957319,"lng":90.1110655}},"location":{"lat":22.0957997,"lng":90.11215360000001},"location_type":"GEOMETRIC_CENTER","viewport":{"northeast":{"lat":22.0971624802915,"lng":90.1135036802915},"southwest":{"lat":22.0944645197085,"lng":90.1108057197085}}},"place_id":"ChIJ8xz8rKqbqjARiENRaV0IsRU","types":["route"]}
+
+
+Update Histroy:
+24-05-2020 India Site:
+/// Duty Hours Binding/////
+1. appadminSub.ejs:
+  Line No: 154 {
+      <li class="tab-link current" data-tab="Basic-detail">Basic Detail</li>
+                        <li class="tab-link" data-tab="bank-details">Bank Details</li>
+                        <li class="tab-link" data-tab="document">Documents</li>
+                        <li class="tab-link" data-tab="dutyhours">Duty and Overtime</li>
+  } 
+
+  Line No" {
+       <div id="dutyhours" class="tab-content">                       
+                       <div class="row">
+                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                           
+                           <div class="page-header">
+                             <h1>Duty<small>Shedule</small></h1>
+                           </div>                            
+                                <div class="form-group col-xs-3 col-sm-3">
+                                  <label>Duty Start</label>
+                                  <input type="text" class="form-control" id="dutyStart" placeholder="ex: 0 to 23">
+                                </div>
+
+                                <div class="form-group col-xs-3 col-sm-3">
+                                  <label>Break Start</label>
+                                  <input type="text" class="form-control" id="breakStart" placeholder="ex: 0 to 23">
+                                </div>
+
+                                <div class="form-group col-xs-3 col-sm-3">
+                                  <label>Break End</label>
+                                  <input type="text" class="form-control" id="breakEnd" placeholder="ex: 0 to 23">
+                                </div>
+
+                                <div class="form-group col-xs-3 col-sm-3">
+                                  <label>Duty End</label>
+                                  <input type="text" class="form-control" id="dutyEnd" placeholder="ex: 0 to 23">
+                                </div>
+                                <div class=" col-xs-3 col-sm-3">
+                                  <button onclick="updateDutyShedule()" type="submit" class="btn btn-primary">Submit</button>
+                                
+                                </div>
+
+                                <div id="dutyDetalis" class=" col-xs-9 col-sm-9">
+                                  Duty : 8 to 17 hr and Break : 12 to 14 hr. Total Duty : 8hr
+                                </div>
+
+                                <div id="msout" class=" col-xs-3 col-sm-3">
+                                 
+                                </div>
+                                
+
+
+                              
+                              
+                            
+                            
+                         </div>
+                           </div>
+                      </div>
+  }
+
+
+  2. subadmin.css: 
+  Line No : 95
+  ul.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: flex;
+    position: absolute;
+    top: 207px;
+    right: 250px;
+  }
+
+  3.  subadmin.js:
+  line 146 {
+      function updateDutyShedule(){
+    var mobile=$("#mobile").val();
+    var isd='+91';
+    var dutyStart=$("#dutyStart").val();
+      var breakStart=$("#breakStart").val();
+      var breakEnd=$("#breakEnd").val();
+      var dutyEnd=$("#dutyEnd").val();
+    $.post('/india/admin/updateDutyShedule',{dutyStart:dutyStart,breakStart:breakStart,breakEnd:breakEnd,dutyEnd:dutyEnd,mobile:mobile,isd:isd},function(data){
+     
+      $("#msout").html(data);
+    })
+  }
+
+  }
+
+  4. india.ja router:
+  line No : 3241 {
+      router.post('/admin/updateDutyShedule', function(req, res, next) {
+  console.log(req.body)
+  database.pilot.findOneAndUpdate({mobileNumber:req.body.mobile,isdCode:req.body.isd},{$set:{
+    dutyStart:req.body.dutyStart,
+    dutyEnd:req.body.dutyEnd,
+    breakStart:req.body.breakStart,
+    BreakEnd:req.body.breakEnd,
+  }},function(err, data){
+    res.send("value Update");
+  }); 
+
+  })
+  }

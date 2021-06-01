@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <style>
+    .file{ width: 1px; height: 1px;  }
+    .document{color: darkblue;}
+    .img-c{height: 100%; }
+    .img-c img{height: 50px; width: 50px;}
+    #sub-btn img{height:20px; }
+    </style> 
+    
+    <script type="text/javascript">
+    //////Submit btnn/////
+    function submitbtn(){
+       $("#sub-btn").html('<img src="/india/images/gif/progress.gif">')
+    }
+
+    function modeofCheckbox(a){
+      
+      if(a===3 && document.getElementById("employee").checked==true){
+       $("#empDetails").html('<div class="form-group">\
+                                <label for="exampleInputEmail1">Job Catagory</label>\
+                                <select name="jobcategory" class="form-control">\
+                                    <option value="Bartender">Bartender</option>\
+                                    <option value="Cook">Cook</option>\
+                                  </select>\
+                              </div>\
+                              <div class="form-group">\
+                                <label for="exampleInputEmail1">Job Sub Catagory</label>\
+                                <select name="jobSubcategory" class="form-control">\
+                                    <option value="Coocktel">Coocktel</option>\
+                                    <option value="Cook">Cook</option>\
+                                    </select>\
+                              </div>\
+                              <div class="form-group">\
+                                <label for="exampleInputEmail1">Age Group</label>\
+                                <select name="ageGroup" class="form-control">\
+                                    <option value="Coocktel">16 to 24 Years</option>\
+                                    <option value="Cook">25 to 35 Years</option>\
+                                    <option value="Cook">35 to 50 Years</option>\
+                                    <option value="Cook">51 to 62 Years</option>\
+                                    </select>\
+                              </div>\
+                              <div class="form-group">\
+                                <label for="exampleInputEmail1">Work Experiance (No Of Years)</label>\
+                               <input name="experance" class="form-control" type="number" placeholder=" Ex: 2">\
+                              </div>\
+                              <div class="form-group">\
+                                <label for="exampleInputEmail1">PAN Number</label>\
+                               <input name="panNumber" class="form-control" type="text" placeholder="Sl 40 30 85 B">\
+                              </div>\
+                              <div class="form-group">\
+                                <label for="exampleInputEmail1">Genger</label>\
+                                <select name="gender" class="form-control">\
+                                    <option value="Coocktel">Male</option>\
+                                    <option value="Cook">Female</option>\
+                                    <option value="Cook">Others</option>\
+                                </select>\
+                              </div>');
+        
+      }else{
+        if(a===3 && document.getElementById("employee").checked == false){
+          $("#empDetails").html('');
+        }
+      }
+
+      if(a===1 && document.getElementById("ride").checked == true){
+          $("#tm").html('<div class="form-group">\
+                                    <label for="exampleInputEmail1">Rider Or Delivery Mode</label>\
+                                    <select name="travelmod" class="form-control">\
+                                        <option value="1">Bike Taxi</option>\
+                                        <option value="2">CNG Auto 5 Set</option>\
+                                        <option value="3">Mini- 4Set</option>\
+                                        <option value="4">Suden 6-8 Set</option>\
+                                        <option value="5">Van [Battery opereted]</option>\
+                                        <option value="6">Easy Bike 8 Set</option>\
+                                        <option value="7">Riksaw</option>\
+                                        <option value="8">Bicycle Only For Ondemend Delivery</option>\
+                                    </select>\
+                                  </div>\
+                              <div class="form-group">\
+                                <label >RTO Reg Number</label>\
+                                <input name="RtoNo" class="form-control" type="text" placeholder=" Ex: WB99B1111">\
+                              </div>\
+                              <div class="form-group">\
+                                <label >Car Model</label>\
+                                <input name="carModel" class="form-control" type="text" placeholder=" Ex: WB99B1111">\
+                              </div>');
+        }else{
+          if(a===1 && document.getElementById("ride").checked == false){
+            $("#tm").html('');
+            document.getElementById("delivery").checked =false;
+          }
+        }
+
+        if(a===2 && document.getElementById("delivery").checked == true){
+            $("#tm").html('<div class="form-group">\
+                                    <label for="exampleInputEmail1">Rider Or Delivery Mode</label>\
+                                    <select name="travelmod" class="form-control">\
+                                        <option value="1">Bike Taxi</option>\
+                                        <option value="2">CNG Auto 5 Set</option>\
+                                        <option value="3">Mini- 4Set</option>\
+                                        <option value="4">Suden 6-8 Set</option>\
+                                        <option value="5">Van [Battery opereted]</option>\
+                                        <option value="6">Easy Bike 8 Set</option>\
+                                        <option value="7">Riksaw</option>\
+                                        <option value="8">Bicycle Only For Ondemend Delivery</option>\
+                                    </select>\
+                                  </div>\
+                              <div class="form-group">\
+                                <label >RTO Reg Number</label>\
+                                <input name="RtoNo" class="form-control" type="text" placeholder=" Ex: WB99B1111">\
+                              </div>\
+                              <div class="form-group">\
+                                <label >Car Model</label>\
+                                <input name="carModel" class="form-control" type="text" placeholder=" Ex: Honda Shine SP">\
+                              </div>');
+          }else{
+            if(a===2 && document.getElementById("delivery").checked == false){
+            $("#tm").html('');
+            document.getElementById("ride").checked = false;
+          }
+          }
+    }
+
+
+    </script>
+    
+    </head>
+    <body>
+        
+        
+        <div class="container">
+           
+          
+          <div class="row">
+              <div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1 col-md-4 col-lg-4">
+                  
+                  <form action="/india/preDrv/completeReg" method="POST" enctype="multipart/form-data" class="form-horizontal" role="form">
+                          <div class="form-group">
+                              <legend>Complete Registration Process</legend>
+                          </div>
+                          <div class="form-group">
+                            <label>Name :<%=driver.name%></label><br>
+                            <label>Account Id :<%=driver.mobileNumber%></label><br>
+                            <input name="mobile" type="hidden" value="<%=driver.mobileNumber%>">
+                            <input name="isd" type="hidden" value="<%=driver.isdCode%>">
+                          </div>
+
+                            <% if(driver.address){%> 
+                          <div class="form-group">
+                            <label>Address :<%=driver.address%></label><br>
+                          </div>
+                          <%}else{%>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Address</label>
+                             <textarea name="address" class="form-control"></textarea>
+                            </div>
+                            <%}%>
+
+
+                            <% if(driver.typeOfWork.length >0){%> 
+                              <div class="form-group">
+                                <label>Type of Work :<%= driver.typeOfWork.toString()%></label><br>
+                              </div>
+                              <%}else{%>
+                                <div class="form-group">
+                                  <label class="col-xs-12 col-sm-12" for="exampleInputEmail1">Type of Work * You can Choose All three</label>
+                                  <div class="checkbox col-xs-3 col-sm-3" >
+                                      <label>
+                                        <input onclick="modeofCheckbox(1)" id="ride" name="riderCheckbox" value="Rider" type="checkbox"> Rider
+                                      </label>
+                                    </div>
+                                    <div class="checkbox col-xs-5 col-sm-5">
+                                      <label>
+                                        <input onclick="modeofCheckbox(2)" id="delivery" name="deliveryCheckbox" value="Delivery" type="checkbox"> Delivery On Demand 
+                                      </label>
+                                    </div>
+                                    <div class="checkbox col-xs-4 col-sm-4">
+                                      <label>
+                                        <input onclick="modeofCheckbox(3)" id="employee" name="employeeCheckbox" value="Employee" type="checkbox"> Employee
+                                      </label>
+                                    </div>                            
+                                </div>
+                              <%}%>
+                            <div id="empDetails">
+                              
+                            </div>
+                            
+
+                              <% if(driver.travelmod){ var out=''%> 
+                                <div class="form-group">
+                                  <% if(driver.travelmod==1){  out='Bike'}%>
+                                  <% if(driver.travelmod==2){  out='CNG 5 seat'}%>
+                                  <% if(driver.travelmod==3){  out='Mini 4 Seat'}%>
+                                  <% if(driver.travelmod==4){  out='Suden 6-8 Seat'}%>
+                                  <% if(driver.travelmod==5){  out='Van (Battery operated'}%>
+                                  <% if(driver.travelmod==6){  out='Easy Bike 8 seat'}%>
+                                  <% if(driver.travelmod==7){  out='Riksaw'}%>
+                                  <% if(driver.travelmod==8){  out='Bicycle Only Delivery On Demend'}%>
+                                  
+                                  <label>Rider Or Delivery Mode :<%=out%>  / RTO No: <%=driver.rtoRegno%></label><br>
+                                </div>
+                                <%}else{%>
+                                  <div id="tm">
+                                  
+                                </div>
+                                  <%}%>
+
+                                  
+
+                               <% if(driver.bankAccountNo){%> 
+                          <div class="form-group">
+                            <label>Bank A/c :<%=driver.bankAccountNo%> &nbsp; IFSC Code :<%=driver.ifsc%></label><br>
+                            
+                          </div>
+                          <%}else{%>
+                            <div class="form-group">
+                              <div class="row">
+                              <label class="col-xs-12 col-sm-12 ">Bank Details</label>
+                              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                <input name="bankAc" class="form-control" type="number" placeholder=" Account Number">
+                              </div>
+                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <input name="ifsc" class="form-control" type="text" placeholder="IFSC Code">
+                              </div>
+                            </div>
+                            </div>
+                            <%}%>           
+                            
+                         
+                          
+
+                          <div class="form-group">
+                            <label class="col-xs-12 col-sm-12">Supported Document</label>
+
+                            <label class="btn btn-default col-xs-6 col-sm-6">Passport Photo &nbsp; <span id="img1" class="document"><i class="fa fa-camera" aria-hidden="true"></i></span> 
+                                <input name="file1" type="file" accept="image/*;capture=camera" class="file">
+                            </label>
+
+                            <label class="btn btn-default col-xs-6 col-sm-6">ID Proof &nbsp; <span id="img1" class="document"><i class="fa fa-camera" aria-hidden="true"></i></span> 
+                                <input name="file2" type="file" accept="image/*;capture=camera" class="file">
+                            </label>
+
+                            <label class="btn btn-default col-xs-6 col-sm-6">Driving Licence &nbsp; <span id="img1" class="document"><i class="fa fa-camera" aria-hidden="true"></i></span> 
+                                <input name="file3" type="file" accept="image/*;capture=camera" class="file">
+                            </label>
+
+                            <label class="btn btn-default col-xs-6 col-sm-6">RTO / Blue book &nbsp; <span id="img1" class="document"><i class="fa fa-camera" aria-hidden="true"></i></span> 
+                                <input name="file4" type="file" accept="image/*;capture=camera" class="file">
+                            </label>
+
+                            <label class="btn btn-default col-xs-6 col-sm-6">Insurence &nbsp; <span id="img1" class="document"><i class="fa fa-camera" aria-hidden="true"></i></span> 
+                                <input name="file5" type="file" accept="image/*;capture=camera" class="file">
+                            </label>
+                            <label class="btn btn-default col-xs-6 col-sm-6">Polution &nbsp; <span id="img1" class="document"><i class="fa fa-camera" aria-hidden="true"></i></span> 
+                              <input name="file6" type="file" accept="image/*;capture=camera" class="file">
+                          </label>
+                            
+                          </div>
+                          
+                  
+                          <div class="form-group">
+                              <div class="col-sm-12">
+                                
+                                  <button id="sub-btn" onclick="submitbtn()" type="submit" class="btn btn-primary">Submit</button>
+                              </div>
+                          </div>
+                  </form>
+                  
+              </div>
+
+              <div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1 col-md-4 col-lg-4">
+                <label class=" col-xs-12 col-sm-12">Uploaded Document</label>
+                <div class="col-xs-4 col-sm-4 img-c">Photo <br><img src="/india/<%=driver.photo%>" onerror="if (this.src != 'error.jpg') this.src = '/india/driverDocument/defult.png';"></div>
+                 <div class="col-xs-4 col-sm-4 img-c">ID Proof <br><img src="/india/<%=driver.Idproof%>" onerror="if (this.src != 'error.jpg') this.src = '/india/driverDocument/defult.png';"></div>
+
+                <div class="col-xs-4 col-sm-4 img-c">D/L <br><img src="/india/<%=driver.dl%>" onerror="if (this.src != 'error.jpg') this.src = '/india/driverDocument/defult.png';"></div>
+                <div class="col-xs-4 col-sm-4 img-c">RTO<br><img src="/india/<%=driver.rto%>" onerror="if (this.src != 'error.jpg') this.src = '/india/driverDocument/defult.png';"></div>
+                <div class="col-xs-4 col-sm-4 img-c">Insurence <br><img src="/india/<%=driver.insurence%>" onerror="if (this.src != 'error.jpg') this.src = '/india/driverDocument/defult.png';"></div>
+                <div class="col-xs-4 col-sm-4 img-c">Polution <br><img src="/india/<%=driver.polution%>" onerror="if (this.src != 'error.jpg') this.src = '/india/driverDocument/defult.png';"></div>  
+              </div>
+
+          </div>
+          
+           
+
+        </div>
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+
+
+

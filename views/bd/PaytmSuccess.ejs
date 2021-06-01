@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+      
+    </head>
+    <body>
+       
+      
+      <div class="container">
+        <%if(payGetway.typeOfReqest=="wallet"){%>
+            <div style="margin-top:20vh;" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div style="text-align: center;" class="thumbnail">
+                    <img src="/india/images/payment-successful.png" alt="">
+                    <div class="caption">
+                        <h3>Wallet Recharge</h3>
+                        <p>Recharge Amount: &#8377; <%=payGetway.TXNAMOUNT%></p>
+                        <p>Wallet Balance: &#8377; <%=waletBalance%></p>
+                        <a href="../india"><button type="button" class="btn btn-success">Continue</button></a>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+
+        <%if(payGetway.typeOfReqest=="driverDeposit"){%>
+            <div style="margin-top:20vh;" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div style="text-align: center;" class="thumbnail">
+                    <img src="/india/images/payment-successful.png" alt="">
+                    <div class="caption">
+                        <h3>Drver Deposit</h3>
+                        <p>Deposit Amount: &#8377; <%=payGetway.TXNAMOUNT%></p>
+                        <p>Account Balance: &#8377; <%=driverLastCheckAccountBalance%></p>
+                        <a href="../india/drv"><button type="button" class="btn btn-success">Continue</button></a>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+
+        <%if(payGetway.typeOfReqest=="preDriverDeposit"){%>
+            <div style="margin-top:20vh;" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div style="text-align: center;" class="thumbnail">
+                    <img src="/india/images/payment-successful.png" alt="">
+                    <div class="caption">
+                        <h3>Pre Driver Receive</h3>
+                        <p>Payment Amount: &#8377; <%=payGetway.TXNAMOUNT%></p>
+                        <p>Account Balance: &#8377; <%=lastCheckCashCollcetion%></p>
+                        <a href="../india/preDrv"><button type="button" class="btn btn-success">Continue</button></a>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+         
+          
+      </div>
+      
+       
+        
+        
+        <script>
+            setTimeout(function(){
+                if('<%=payGetway.typeOfReqest%>'=="driverDeposit"){
+                    window.location.href='../india/drv';
+                }
+                if('<%=payGetway.typeOfReqest%>'=="wallet"){
+                    window.location.href='../india';
+                }
+
+                if('<%=payGetway.typeOfReqest%>'=="preDriverDeposit"){
+                    window.location.href='../india/preDrv';
+                }
+            },10*1000);
+        </script>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paa Login</title>
+        <link href="/india/images/logo/paaicon.png" rel="icon">
+        <link rel="stylesheet" type="text/css" href="/india/stylesheets/instyle.css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script src="/india/javascripts/inPreDriverCashCollection.js"></script>
+        
+        <!-- <script src="/india/javascripts/inPreDriverjs.js"></script> -->
+
+        <!-- <script id="context" type="text/javascript"  src="https://sandbox-payments.open.money/layer"></script> -->
+        <script id="context" type="text/javascript"  src="https://payments.open.money/layer"></script>
+        
+        
+    </head>
+    <body>
+        <!-- <div class="headernav">
+            <img src="/india/images/logo/paalogo.png">
+        </div> -->
+        
+        
+       
+       <div class="container-fluid">
+
+        <div style="background-color: #facb3d;" class="row">
+            <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4 ">
+                <img style="width: 100%;" src="/india/images/logo/paalogo.png">
+            </div>
+        </div>
+         
+         <div style="margin-top: 30px;" class="row">
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-group">
+                    <li class="list-group-item active ">
+                      <span style="font-size: medium;" class="badge">&#8377;  <%=(Number(previousDue)+ Number(dailyCollection)).toFixed(2)%></span>
+                      Total Cash Collection
+                    </li>
+                    <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#8377;  <%=previousDue.toFixed(2)%></span>
+                        Previous Due
+                      </li>
+                      <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#8377;  <%=dailyCollection.toFixed(2)%></span>
+                        Today's Collcetion
+                      </li>
+                  </ul>
+                                 
+             </div>
+
+             <%if(cetegory=="2"){%> 
+
+             
+            <%}else{%>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="list-group">
+                        <li class="list-group-item active ">
+                          <span style="font-size: medium; " class="badge">&#8377; <%=(Number(PendingConsumption)+ Number(dailyConsum.dailyConsm)).toFixed(2)%> </span>
+                          Fule Consumption
+                        </li>
+                        <li class=" list-group-item list-group-item-info ">
+                            <span class="badge">&#8377; <%=Number(PendingConsumption).toFixed(2)%></span>
+                            Pending Consumption
+                          </li>
+                        <li class=" list-group-item list-group-item-info ">
+                            <span class="badge">&#8377; <%=Number(dailyConsum.dailyConsm).toFixed(2)%></span>
+                            Today's KM Run <%=dailyConsum.totalkm%>KM<br>
+                            Fl Price :&#8377; <%=dailyConsum.fulePrice%>  Milege: <%=dailyConsum.mileage%>
+    
+                           
+                          </li>
+                    </ul>                
+                </div>
+            <%}%>
+
+         </div>
+
+
+         <div class="row">
+            <%if(cetegory=="2"){%>
+             <%var cashColc=Number(previousDue)%>
+             <%var previousPayout=Number(previousPayout)%>
+             <%var cashColc=Number(previousDue)%>
+             <%var fulecomsum=0%>
+             <%if( cashColc - fulecomsum > 0){%> 
+            <div class="col-xs-12 col-sm-12">                
+                <!-- <form action="/india/pay" method="POST" class="form-inline" role="form">                                            -->
+                    <input type="hidden" id="payAmount" name="payAmount" class="form-control" value="<%= Math.abs(cashColc - fulecomsum).toFixed(2)%>" >                       
+                    <input type="hidden" id="CustID" name="CustID" value="<%=pilot.pilotID%>">
+                    <input type="hidden" id="typeOfReqest" name="typeOfReqest" value="preDriverDeposit"> 
+                    <input type="hidden" id="mobileNumber" name="mobileNumber" value="<%=pilot.mobileNumber%>">
+                    <input type="hidden" id="email" name="email" value="<%=pilot.email%>">                 
+                   <!-- <button type="submit" class="btn btn-success btn-block col-xs-12 col-sm-12">Deposit &#8377; <%= Math.abs(cashColc - fulecomsum).toFixed(2)%></button> 
+               </form> -->                    
+                    <button onclick="icicipay()" type="button" class="btn btn-success btn-block col-xs-12 col-sm-12">Deposit &#8377; <%= Math.abs(cashColc - fulecomsum).toFixed(2)%></button>
+            </div>
+            <%}else{%>
+            <div class="col-xs-12 col-sm-12"> 
+                <form name="myForm" action="/india/withdrawal" onsubmit="return validateForm()" method="POST" class="form-inline" role="form">                                           
+                    <input type="hidden" name="withdrawlAmount" class="form-control" value="<%= Math.abs(fulecomsum - cashColc).toFixed(2)%>" >                       
+                    <input type="hidden" name="pilotID" value="<%=pilot.pilotID%>">
+                    <input type="hidden" name="typeOfReqest" value="preDriverWidthral">
+                    <button type="submit" class="btn btn-warning btn-block col-xs-12 col-sm-12">Withdrawal &#8377; <%=(fulecomsum - cashColc).toFixed(2)%></button>               
+                  </form>             
+            </div>
+            <%}%>
+             
+            
+
+            <%}else{%>
+             <%var cashColc=Number(previousDue)%>
+             <%var fulecomsum=Number(PendingConsumption)%>
+             <%if( cashColc - fulecomsum > 0){%> 
+            <div class="col-xs-12 col-sm-12">                
+                <!-- <form action="/india/pay" method="POST" class="form-inline" role="form">                                            -->
+                    <input type="hidden" id="payAmount" name="payAmount" class="form-control" value="<%= Math.abs(cashColc - fulecomsum).toFixed(2)%>" >                       
+                    <input type="hidden" id="CustID" name="CustID" value="<%=pilot.pilotID%>">
+                    <input type="hidden" id="typeOfReqest" name="typeOfReqest" value="preDriverDeposit"> 
+                    <input type="hidden" id="mobileNumber" name="mobileNumber" value="<%=pilot.mobileNumber%>">
+                    <input type="hidden" id="email" name="email" value="<%=pilot.email%>">                 
+                   <!-- <button type="submit" class="btn btn-success btn-block col-xs-12 col-sm-12">Deposit &#8377; <%= Math.abs(cashColc - fulecomsum).toFixed(2)%></button> 
+               </form> -->                    
+                    <button onclick="icicipay()" type="button" class="btn btn-success btn-block col-xs-12 col-sm-12">Deposit &#8377; <%= Math.abs(cashColc - fulecomsum).toFixed(2)%></button>
+            </div>
+            <%}else{%>
+            <div class="col-xs-12 col-sm-12"> 
+                <form name="myForm" action="/india/withdrawal" onsubmit="return validateForm()" method="POST" class="form-inline" role="form">                                           
+                    <input type="hidden" name="withdrawlAmount" class="form-control" value="<%= Math.abs(fulecomsum - cashColc).toFixed(2)%>" >                       
+                    <input type="hidden" name="pilotID" value="<%=pilot.pilotID%>">
+                    <input type="hidden" name="typeOfReqest" value="preDriverWidthral">
+                    <button type="submit" class="btn btn-warning btn-block col-xs-12 col-sm-12">Withdrawal &#8377; <%=(fulecomsum - cashColc).toFixed(2)%></button>               
+                  </form>             
+            </div>
+            <%}%>
+
+            <%}%>
+
+             
+
+        </div>
+
+        
+        <div style="margin-top: 20px;" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <%if(exit=="exit"){%> 
+                <a href="../india/preDrv"><button  type="button" class="btn btn-danger col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">Go to Offline</button> </a>              
+                <%}else{%> 
+                <a href="../india/preDrv"><button  type="button" class="btn btn-danger  col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">Back</button>  </a>              
+                <%}%>
+            </div>
+        </div>
+       </div>
+       
+        
+        
+            
+       <script>
+       function validateForm() {
+            var x = document.forms["myForm"]["withdrawlAmount"].value;
+            if (x > 49) {
+                
+                return true;
+            }else{
+                alert("amount Should be more the 50");
+                return false;  
+            }
+            }
+            
+
+    
+       </script>
+        
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,37 @@
+.header-logo{background-color: #facb3d; position: fixed; height: 10vh;}
+.delivery-menu{background-color: rgb(228, 214, 214); position: fixed; height: 7vh; top: 10vh;} 
+.datatab{margin-top: 3px; margin-bottom: 3px;}
+.datatab-text{font-size:12px; 
+   
+    text-align: center; 
+    display: table-cell;    
+    height: 40px;
+    padding: 2px;
+    border: 2px solid #0b0c0c;
+    border-radius: 10px;
+    vertical-align: middle;background-color: chocolate; color: cornsilk;  }
+.data-content{position: fixed; height: 83vh; top: 17vh; width: 100%;} 
+.map-content{position: fixed; height: 83vh; top: 17vh; width: 100%; } 
+#map {
+    height: 100%;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+   }
+
+   
+#map .centerMarker {
+position: absolute;
+/*url of the marker*/
+background: url(/india/images/centerpin.png) no-repeat;
+/*center the marker*/
+top: 50%;
+left: 50%;
+z-index: 1;
+/*fix offset when needed*/
+margin-left: -16px;
+margin-top: -32px;
+/*size of the image*/
+height: 32px;
+width: 32px;
+cursor: pointer;
+opacity: 0.7;
+}   

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Paa Registration</title>
+            <link href="/india/images/logo/paaicon.png" rel="icon">
+            <link rel="stylesheet" type="text/css" href="/india/stylesheets/inTdriver.css" />
+            <!-- Bootstrap CSS -->
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+           
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="/india/javascripts/inTdriverlogreg.js"></script>
+            
+       
+        
+    </head>
+    <body>
+
+       
+        <div class="headernav">
+            <img src="/india/images/logo/paalogo.png">
+        </div>
+        
+        <div id="fromContent" class="from-content">
+            <%if(reg==1){%> 
+            <form action="/india/tdrv/reg/otp" method="POST">
+            <div style="margin-top: 25vh;" class="row">
+                <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <p style="font-size: 20px; color: rgb(34, 112, 44); text-align: center; margin-bottom: 20px; font-weight: bolder;"  >New Driver Registration</p>
+                    <div class="form-group">
+                        <%if(msg){%> 
+                        <span style="color: rgb(233, 12, 12); width: 100%; text-align: center;"><%=msg%></span><br>
+                        <%}%>
+                           
+                        
+                    <label class="control-label" for="mobile">Enter Valid Mobile Number</label>
+                        <div class="input-group">                       
+                            <div class="input-group-addon">+91</div>                    
+                            <input id="mobile" name="mobile"  type="text" class="form-control" placeholder="Mobile Number" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 50px;" id="submit-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group">                      
+                      <input type="submit" value="Next" id="submit-btn" class="btn btn-large btn-block btn-success">
+                                               
+                    </div>
+                </div>
+            </div>
+        </form> 
+        <%}%> 
+        
+        <%if(reg==2){%> 
+        <form action="/india/tdrv/reg/otpverify" method="POST">
+        <div style="margin-top: 25vh;" class="row">
+            <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                <p style="font-size: 20px; color: rgb(34, 112, 44); text-align: center; margin-bottom: 20px; font-weight: bolder;"  >New Driver Registration</p>
+                <div class="form-group"> 
+                    <%if(msg){%> 
+                        <span style="color: rgb(233, 12, 12); width: 100%; text-align: center;"><%=msg%></span><br>
+                        <%}%>                              
+                    
+                <label class="control-label" for="mobile">Mobile Number</label>
+                    <div class="input-group">                       
+                        <div class="input-group-addon">+91</div>                    
+                        <input id="mobile" name="mobile"  type="text" value="<%=mobile%>" class="form-control" readonly placeholder="Mobile Number">
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                <div class="form-group "> 
+                    <div class="col-xs-6 col-sm-6">
+                        <input id="otp1" name="otp1" type="text" class="form-control  " placeholder=" 4 Digit OTP">
+                        <input id="otp"  name="otp" type="hidden" value="<%=otp%>">
+                    </div> 
+                    <div class="col-xs-6 col-sm-6">
+                        <input type="submit" value="Verify OTP" id="submit-btn" class="btn btn-large btn-block btn-success">
+                    </div>                      
+                    
+                </div>
+
+  
+            </div>    
+        </div>
+        </form>
+        <%}%>
+        <%if(reg==3){%> 
+            <form action="/india/tdrv/driverReg" method="POST" enctype="application/x-www-form-urlencoded" onSubmit="return regFromValidation()">
+            <div style="margin-top: 25vh;" class="row">
+                <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <p style="font-size: 20px; color: rgb(34, 112, 44); text-align: center; margin-bottom: 20px; font-weight: bolder;"  >New Driver Registration</p>
+                    <div class="form-group"> 
+                        <%if(msg){%> 
+                            <span style="color: red; width: 100%; text-align: center;"><%=msg%></span><br>
+                            <%}%> 
+                            
+                            <%if(latlng){%> 
+                                <input name="lat" type="text" value="<%=latlng.lat%>">
+                                <input name="lng" type="text" value=" <%=latlng.lng%>">
+                            <%}else{%>
+                                <input name="lat" type="hidden" value="">
+                                <input name="lng" type="hidden" value="">
+                            <%}%> 
+                        
+                    <label class="control-label" for="mobile">Mobile Number</label>
+                        <div class="input-group">                       
+                            <div class="input-group-addon">+91</div>                    
+                            <input id="mobile" name="mobile"  type="text" value="<%=mobile%>" class="form-control" readonly placeholder="Mobile Number">
+                        </div>
+                    </div>
+                </div>
+                <div id="name-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                            <input id="name" name="name" type="text" class="form-control" placeholder="Your Full Name" required> 
+                    </div>
+                </div>
+                      
+                
+                <div id="password-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                            <input id="password" name="password" type="password" class="form-control" placeholder="Password" required> 
+                    </div>
+                </div>
+
+                <div id="email-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                            <input id="email" name="email" type="email" class="form-control" placeholder="email Id" required> 
+                    </div>
+                </div>
+
+                <div id="ref-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                            <select onchange="refferenceCall()" id="reffrom" name="reffrom" class="form-control">
+                                <option value="1">Select Refference</option>
+                                <option value="News">News Paper / Other Media</option>
+                                <option value="paadriver">Paa Driver</option>                                
+                            </select>
+                    </div>
+                </div>
+
+                <div id="ref-by-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                        <input id="refby"  name="refby" type="text" class="form-control" placeholder="Ref : Mobile Number"> 
+                    </div>
+                </div>
+
+                <div style="margin-top: 50px;" id="submit-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group">                      
+                      <input type="submit" value="Singup" id="submit-btn" class="btn btn-large btn-block btn-success">
+                                               
+                    </div>
+                </div>
+            </div>
+            </form>
+            <%}%>
+
+        
+        </div>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+

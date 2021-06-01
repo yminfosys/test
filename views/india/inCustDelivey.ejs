@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Passenger</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+
+        <link rel="stylesheet" type="text/css" href="/index/stylesheets/sidebar.css" />
+        <link rel="stylesheet" type="text/css" href="/india/stylesheets/inCustDlivery.css" />
+
+        <script src="/index/javascripts/socket.io.js"></script>        
+        <script src="/india/javascripts/inCustDeliveryjs.js"></script>
+        <script src="/index/javascripts/sidebar.js"></script>
+        
+       
+    </head>
+    <body>
+        <div id="sidebar-waper">
+            <div class="togle-btn" onclick="sidebartoggle()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+
+            <ul class="sidebar-menue">
+            <li class="Dashboard" style="border-bottom: 1px solid #FFF;">
+                <div style="font-size: 25px; text-align: center;"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
+                <div class="text-center"><%=cust.name%><br><%=cust.isdCode%><%=cust.mobileNumber%></div>
+                
+            </li>
+            <li class="Recharge">
+              <a href="#RechargeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
+                  <span>Recharge</span>
+              </a>
+              <ul class="collapse " id="RechargeSubmenu">
+                  <li><a href="#">Wallet Recharge </a></li>
+                  <li><a href="#">Buy Km</a></li>
+                  
+                  </ul>
+            </li>
+
+            <li class="Myrides">
+                <a href="#MyridesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa fa-taxi" aria-hidden="true"></i>
+                    <span>My Rides</span>
+                </a>
+                <ul class="collapse " id="MyridesSubmenu">
+                    <li><a href="#">My Rides </a></li>
+                    <li><a href="#">Invoice</a></li>
+                    
+                    </ul>
+              </li>
+
+              <li class="freekm"><a href="#">                
+                <i class="fa fa-gift" aria-hidden="true"></i>
+                  <span>Earn Free Km</span>
+                  </a>
+              </li>
+
+              <li class="Notification"><a href="#">                
+                <i class="fa fa-bell" aria-hidden="true"></i>
+                  <span>Notification</span>
+                  </a>
+              </li>
+
+            <li class="Logout">
+                <a href="/india/logout/cust">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                     <span> Logout</span>
+                    </a>
+            </li>
+            </ul>
+        </div>
+
+
+        <!-- Session Declare -->
+        <!-- <input name="ModeofTravel" id="ModeofTravel" type="hidden" value="1"> -->
+        <input name="ModeofSearch" id="ModeofSearch" type="hidden" value="1">
+        <input name="ModeofDelivery" id="ModeofDelivery" type="hidden" value="1">
+        <input  id="totalDistance" type="hidden">
+        <input id="travelTime" type="hidden" > 
+        <input id="CustID" type="hidden" value="<%=cust.CustID%>"> 
+
+        <input id="travelTime" type="hidden">
+        <input id="distance" type="hidden">
+
+        <input id="deliveryType" type="hidden">
+
+        <input id="deliveryPrice" type="hidden">
+
+        <input id="pickupName_s" type="hidden">
+        <input id="pickupDirection_s" type="hidden">
+        <input id="pickupMobile_s" type="hidden">
+        <input id="dropName_s" type="hidden">
+        <input id="dropDirection_s" type="hidden">
+        <input id="dropMobile_s" type="hidden">
+        
+        
+        <div style="background-color: rgb(243, 242, 236);" id="main-content">            
+            <div class="container-fluid">
+                <div style="background-color: #facb3d;" class="row">
+                    <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4 ">
+                        <img style="width: 100%; margin-top: 5px;" src="/india/images/logo/paalogo.png">
+                    </div>
+                </div>
+                
+                <div  role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a style="font-size: 9px;" href="#atoz" aria-controls="home" role="tab" data-toggle="tab">Request a Delivery</a>
+                        </li>
+                        <li role="presentation">
+                            <a  style="font-size: 9px;" href="#food" aria-controls="tab" role="tab" data-toggle="tab">Food</a>
+                        </li>
+
+                        <li role="presentation">
+                            <a  style="font-size: 9px;" href="#grocery" aria-controls="tab" role="tab" data-toggle="tab">All Items</a>
+                        </li>
+                        <li role="presentation">
+                            <a style="font-size: 9px;" href="#grocery" aria-controls="tab" role="tab" data-toggle="tab">Medicine</a>
+                        </li>
+                    </ul>
+                
+                    <!-- Tab panes -->
+                    <div style="background-color: rgb(243, 242, 236);height: 90vh; " class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="atoz" style="background-color: #FFF; position: fixed; width: 92%;">
+                            <div id="mapContent"    class="row ">
+                                <div style="height: 45vh;" class="col-xs-12 col-sm-12 "> 
+                                    <div id="map"></div>
+                                </div>
+
+                                <div id="footerContent" style="height: 37vh; margin-top: 10px;" class="col-xs-12 col-sm-12 "> 
+                                    <div class="col-xs-12 col-sm-12 ">
+                                        <div class="col-xs-1 col-sm-1 ">
+                                            <div style="text-align: center; font-size: 30px; margin-left: 5px; color: #168347; "><i class="fa fa-map-marker" aria-hidden="true"></i></div> 
+                                        </div>
+                                        <div class="col-xs-10 col-sm-10">
+                                            <div class="form-group">
+                                                <input name="picuplocation"  onclick="pickupsearch(1)" type="text"  class="form-control" id="picuplocation" placeholder="Pick up Address" readonly>
+                                                <input  id="pickuplat" type="hidden"  >
+                                                <input  id="pickuplng" type="hidden" >
+                                                
+                                                <input  id="pickuplat1" type="hidden" value="<%=cust.pickuplatlong[0]%>" >
+                                                <input  id="pickuplng1" type="hidden" value="<%=cust.pickuplatlong[1]%>"> 
+                                                <input  id="picuplocation1" type="hidden" value="<%=cust.picuplocation%>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-sm-12 ">
+                                        <div class="col-xs-1 col-sm-1 ">
+                                            <div style="text-align: center; font-size: 30px; margin-left: 5px; color:rgb(163, 19, 19);"><i class="fa fa-map-marker" aria-hidden="true"></i></div> 
+                                        </div>
+                                        <div class="col-xs-10 col-sm-10">
+                                            <div class="form-group">                                
+                                                <input name="droplocation" onclick="pickupsearch(2)" type="text" class="form-control" id="droplocation" placeholder="Drop Adderss" readonly>
+                                                <input  id="droplat" type="hidden" >
+                                            <input  id="droplng" type="hidden" >
+    
+                                            <input  id="droplat1" type="hidden" value="<%=cust.droplatlong[0]%>">
+                                            <input  id="droplng1" type="hidden" value="<%=cust.droplatlong[1]%>" >
+                                            <input  id="droplocation1" type="hidden" value="<%=cust.droplocation%>" >
+                                                
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
+
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <img onclick="cheageDeliveryMode(1)" id="deliveryModeIMG1" style="width: 80%; border: 3px solid rgb(9, 218, 44); padding: 2px;" class="img-circle" src="/india/images/delideryMod1.png">
+                                        <p class="text-center smtext">Push Bike</p>
+                                    </div>
+
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <img onclick="cheageDeliveryMode(2)" id="deliveryModeIMG2" style="width: 80%; border: 1px solid #000; padding: 2px;" class="img-circle" src="/india/images/delideryMod2.png">
+                                        <p class="text-center smtext">Motor Bike</p>
+                                    </div>
+
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <img onclick="cheageDeliveryMode(3)" id="deliveryModeIMG3" style="width: 80%; border: 1px solid #000; padding: 2px;" class="img-circle" src="/india/images/delideryMod3.png">
+                                        <p class="text-center smtext">Car</p>
+                                    </div>
+
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <img onclick="cheageDeliveryMode(4)" id="deliveryModeIMG4" style="width: 80%; border: 1px solid #000; padding: 2px;   " class="img-circle" src="/india/images/delideryMod4.png">
+                                        <p class="text-center smtext">Van</p>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-xs-offset-4 col-sm-offset-4">
+                                     
+                                     <button  id="naxtBtn" type="button" class="btn btn-primary">Continue</button>
+                                     
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div id="placesearch">                           
+                                <span id="closall" onclick="CloseAll('placesearch')">X</span>
+                                <form action="" method="POST" class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                                <input onkeydown="searchdown()"  onkeyup="searchup()" type="text" class="form-control" id="searchPlace" placeholder="Search Address" >
+                                                <img class="searchGif" src="/india/images/gif/378.gif">
+                                                <input type="hidden" id="searchMode">
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="placeList" class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 list-group">
+                                                
+                                            <a onclick="CloseAll('placesearch')"  class="list-group-item active"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; OK Select From Map</a>
+                                            
+                                        </div>
+                    
+                                   </form>
+                                   
+                        </div>
+                        <div id="delivertDrescription">
+                            
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <p style="text-align: center; font-size: larger; margin-top: 50px;">Your Order Is Confarm</p>
+                                    <p style="text-align: center; font-size: larger;">Order ID : 345</p>
+                                    <p>Processing......</p>
+                                    <p><img style="width: 100%; height: 30px;" src="/india/images/gif/378.gif"></p>
+                                </div>
+                            </div>
+                            
+
+                            <!-- <div class="row">
+                                <div style="height:84vh; overflow-y: auto;" class="col-xs-12 col-sm-12">
+                                    <div class="panel panel-success">
+                                          <div class="panel-heading">
+                                                <h3 class="panel-title">Pick Up</h3>
+                                          </div>
+                                          <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="input" class="col-sm-2 control-label">Name:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="input" class="col-sm-2 control-label">Address:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textarea" class="col-sm-2 control-label">Driver Direction:</label>
+                                                <div class="col-sm-10">
+                                                    <textarea name="" id="textarea" class="form-control" rows="3" required="required"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="input" class="col-sm-2 control-label">Mobile No:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                                </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                              <h3 class="panel-title">Drop</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                          <div class="form-group">
+                                              <label for="input" class="col-sm-2 control-label">Name:</label>
+                                              <div class="col-sm-10">
+                                                  <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="input" class="col-sm-2 control-label">Address:</label>
+                                              <div class="col-sm-10">
+                                                  <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="textarea" class="col-sm-2 control-label">Driver Direction:</label>
+                                              <div class="col-sm-10">
+                                                  <textarea name="" id="textarea" class="form-control" rows="3" required="required"></textarea>
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="input" class="col-sm-2 control-label">Mobile No:</label>
+                                              <div class="col-sm-10">
+                                                  <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <div class="col-sm-10 col-sm-offset-2">
+                                                  <button onclick="continueUpdate()" class="btn btn-primary">Submit</button>
+                                              </div>
+                                          </div>
+                                        </div>
+                                  </div>
+                                </div>    
+                            </div>     -->
+                            
+                            <!-- <div class="row">
+                                <div class="col-xs-2 col-sm-2 col-xs-offset-5 col-sm-offset-10 ">
+                                    <img id="expend" onclick="expendDetails(1)" style="width: 100%;" src="/india/images/expend1Arrow.png">
+                                    <img id="dexpend" onclick="expendDetails(2)" style="width: 100%; display: none;" src="/india/images/expendArrow.png">
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="col-xs-3 col-sm-3">
+                                        <img style="width: 100%; border: 1px solid rgb(218, 9, 9);" class="img-circle" src="/india/images/delideryMod1.png">
+                                        <span style="font-size: xx-small; text-align: center; margin-left: 10%;">Push Bike</span>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <img id="deliveryType1" onclick="changeDelivertType(1)" style="width: 100%; border: 3px solid rgb(9, 218, 44); padding: 1px;" class="img-rounded" src="/india/images/urgent.png">
+                                            <span style="font-size: 8px; text-align: center; margin-left: 10%;" >Urgent</span>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <img id="deliveryType2" onclick="changeDelivertType(2)" style="width: 100%; border: 1px solid rgb(8, 8, 8); padding: 1px;" class="img-rounded" src="/india/images/sameday.jpeg">
+                                            <span style="font-size:8px; text-align: center; margin-left: 10%;" >Same-Day</span>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <img id="deliveryType3" onclick="changeDelivertType(3)" style="width: 100%; border: 1px solid rgb(5, 5, 5); padding: 1px;" class="img-rounded" src="/india/images/nextDay.png">
+                                            <span style="font-size: 8px; text-align: center; margin-left: 10%;" >Next-Day</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">
+                                        
+                                    <button type="button" class="btn btn-primary col-xs-12 col-sm-12">&#163; 4.50</button>
+                                    
+                                </div>
+                                <div style="margin-top: 10px;" class="col-xs-8 col-sm-8 col-xs-offset-2 col-sm-offset-2">
+                                    <button type="button" class="btn btn-success col-xs-12 col-sm-12 ">Confram Delivery</button>
+                                </div>
+                                <div style="margin-top: 10px; overflow-y: auto; height: 50%;" class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1">
+                                    <ul style="font-size: 8px;" class="list-group">
+                                        <li class="list-group-item active">
+                                            <span style="font-size: 8px;" class="badge">&#163;12.80</span>
+                                          Delivery: 1
+                                        </li>
+                                        <li class="list-group-item">
+                                          Pickup: City Center Mobile: 9733241080<br>
+                                          Drop: City Center Mobile: 9733241080
+                                        </li>
+
+                                        <li class="list-group-item active">
+                                            <span style="font-size: 8px;" class="badge">&#163;12.80</span>
+                                          Delivery: 1
+                                        </li>
+                                        <li class="list-group-item">
+                                          Pickup: City Center Mobile: 9733241080<br>
+                                          Drop: City Center Mobile: 9733241080
+                                        </li>
+                                    </ul> 
+                                </div>
+                                
+                            </div> -->
+                            
+                            
+                            
+                            
+
+                        </div>
+
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="food">
+                            Under Construction 
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="grocery">
+                            Under Construction
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- <div class="row map-content">
+                    <div id="map"></div>
+                </div>
+
+                <div class="row footer">
+                    <div class="col-xs-12 col-sm-12">                                
+                        <div class="row">
+                            <div class="col-xs-1 col-sm-1 ">
+                                <div style="text-align: center; font-size: 30px; margin-left: 5px; color: #168347; "><i class="fa fa-map-marker" aria-hidden="true"></i></div> 
+                            </div>
+                            <div class="col-xs-10 col-sm-10">
+                                <div class="form-group">
+                                    <input name="picuplocation"  onclick="pickupsearch(1)" type="text"  class="form-control" id="picuplocation" placeholder="Pick up Address" readonly>
+                                </div>
+                            </div>
+                        </div>
+                   </div>  -->
+
+
+                </div>
+
+        </div>
+        
+
+           
+
+           
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script async defer   
+        src="https://maps.googleapis.com/maps/api/js?key=<%=YOUR_API_KEY%>&callback=initMap">
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+

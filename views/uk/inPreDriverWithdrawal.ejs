@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paa Login</title>
+        <link href="/uk/images/logo/paaicon.png" rel="icon">
+        <link rel="stylesheet" type="text/css" href="/uk/stylesheets/instyle.css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- <script src="/uk/javascripts/inPreDriverjs.js"></script> -->
+        
+        
+    </head>
+    <body>
+        <!-- <div class="headernav">
+            <img src="/uk/images/logo/paalogo.png">
+        </div> -->
+        
+        
+       
+       <div class="container-fluid">                 
+           <div style="margin-top: 20px;"  class="row">
+               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-group">
+                    <li class="list-group-item active ">
+                      <span style="font-size: medium; " class="badge">&#163; <%=newReq.withdrawlAmount%> </span>
+                      Withdrawl Request
+                    </li>
+                    <li class=" list-group-item list-group-item-info ">
+                        <span class="badge text-success ">Initiate</span>
+                        Status <br>
+                        Date:<%=new Date().toISOString().replace('T', ' ').substr(0, 10)%><br>
+                       
+                        Name: <%=pilot.name%><br>
+                        A/c : <%=pilot.bankAccountNo%> IFSC: <%=pilot.ifsc%>
+                        
+                      </li>
+                </ul>
+                <a  href="../uk/preDrv"><button type="button" class="btn btn-success col-xs-12 col-sm-12 col-md-12 col-lg-12 ">Back</button></a>
+                
+               </div>
+           </div>
+         
+          
+           <div class="row">
+             <div   class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success ">                     
+                        Previous Withdrawl Status 
+                    </li>
+                </ul>
+                <% oldwithdrawal.forEach(function(val){%>
+                    <ul class="list-group">
+                      
+                        <li class="list-group-item active ">
+                          <span style="font-size: medium; " class="badge">&#163; <%=val.Withdrawal%> </span>
+                          Withdrawl Request
+                        </li>
+                        <li class=" list-group-item list-group-item-success ">
+                            <span class="badge "><%=val.WithdrawalReqestStatus%></span>
+                            Status <br>
+                            Date:<%=val.date.toISOString().replace('T', ' ').substr(0, 10)%><br>
+                                                     
+                            Name: <%=val.name%><br>
+                            A/c : <%=val.accountno%> IFSC: <%=val.ifsc%>
+                            
+                          </li>
+                    </ul>  
+                <%})%>                
+            </div>
+           </div>
+           
+
+
+        </div>
+
+ 
+        
+            
+       
+        
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+

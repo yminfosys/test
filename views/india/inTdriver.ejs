@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paa Pilot</title>
+        <link href="/india/images/logo/paaicon.png" rel="icon">
+
+       <!-- Bootstrap CSS -->
+       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+       <link rel="stylesheet" type="text/css" href="/index/stylesheets/sidebar.css" />
+       <link rel="stylesheet" type="text/css" href="/india/stylesheets/inTdriver.css" />
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+       
+       <script src="/india/javascripts/socket.io.js"></script>
+       <script src="/india/javascripts/inTdriver.js"></script>       
+       <script src="/index/javascripts/sidebar.js"></script>
+
+       <!-- <script id="context" type="text/javascript"  src="https://sandbox-payments.open.money/layer"></script> -->
+       <script id="context" type="text/javascript"  src="https://payments.open.money/layer"></script>
+        
+     
+    </head>
+    <body>
+        <!-- Page Session -->
+        <input id="orderStage" type="hidden" value="<%=driver.orderStage%>" >
+        <input id="bookingID" type="hidden" value="<%=driver.bookingID%>" >
+        <input id="lat" type="hidden" value="<%=driver.latlong[0]%>" >
+        <input id="lng" type="hidden" value="<%=driver.latlong[1]%>" >
+        <input id="incetiveCity" type="hidden" value="<%=driver.cityName%>" >
+        <input id="incentiveTravelMode" type="hidden" value="<%=driver.travelmod%>" >
+        <input id="mobileno" type="hidden" value="<<%=driver.mobileNumber%>" >
+        
+
+        
+        <input id="mapclick" type="hidden" value="<%=driver.mapclick%>" >
+
+        <div id="sidebar-waper">
+            <div class="togle-btn" onclick="sidebartoggle()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="sidebar-menue">
+                <li class="Dashboard" style="border-bottom: 1px solid #FFF;">
+                    <div style="font-size: 25px; text-align: center;"><img style="width: 60px; height: 60px; border-radius: 30px;" src="<%=driver.photo%>"></div>
+                    <div class="text-center"><%=driver.name%><br><%=driver.isdCode%><%=driver.mobileNumber%>  </div>
+                    
+                </li>
+                <li class="cash"><a style="cursor: pointer;"  onclick="idCard()">                
+                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                      <span>Paa ID Card</span>
+                      </a>
+                </li>
+                <li class="cash"><a style="cursor: pointer;"  onclick="ledger()">                
+                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                      <span>Accounts</span>
+                      </a>
+                </li>
+
+                <li class="insentive" onclick="driverPaymentBreakdown()">
+                    <a href="#">                
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                        <span>Payment Break-Down</span>
+                        </a>
+                    </li>
+
+                <li class="insentive" onclick="incentive()">
+                    <a href="#">                
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                        <span>Incentive</span>
+                        </a>
+                    </li>
+
+                <li class="insentive" onclick="docUment()">
+                    <a href="#">                
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        <span>Document</span>
+                        </a>
+                    </li>
+               
+                <li class="insentive" onclick="referaFriend()">
+                    <a href="#">                
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <span>Refer a friend</span>
+                        </a>
+                    </li>    
+
+                <li class="help"><a href="#">                
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <span>Help</span>
+                        </a>
+                    </li>
+                <li class="Logout" onclick="logout()">
+                    <a href="/india/tdrv/logout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                         <span> Logout</span>
+                        </a>
+                </li> 
+            </ul>
+        </div>
+        
+        <div id="main-content">
+            <div id="heder-content">
+                <input id="toggle" class="toggle" type="checkbox" role="switch" name="toggle" value="on">
+                <label for="toggle" class="slot"></label>
+                <div class="curtain"></div>
+                <script>
+                        // for accessibility only
+                        document.getElementById("toggle").addEventListener("change",function() {
+                            this.setAttribute("aria-checked",this.checked);
+                        });
+ 
+                </script>
+            </div>
+            <div id="sos">
+                <a href="tel:100" ><button type="button" class="btn btn-warning btn-ms"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp; SOS</button></a>
+            </div>
+
+            <div id="map-msg">
+                <img src="/india/images/gif/circle1.gif">
+            </div>
+            <div id="mapcontent">
+                <div id="map"></div>
+            </div>
+            <div  id="offline-content">
+                <p style="margin-top: 50px;">You Are Offline</p>
+                
+            </div>
+            <!-- For Incomming Call -->
+        <div id="ringtone">            
+            <div class="container">
+                <div style="margin-top: 30px;" class="row">
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                     <img style="width: 100%;" src="/india/images/gif/circle1.gif">
+                     <div style="position: relative; top: -95px; left: 45%;">
+                        <div id="ringClock" style="font-size: 30px;">15</div>
+                    </div>                     
+                    </div>
+                    
+                </div>
+                
+                <div style="margin-top: 20px;" class="row">                    
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">                      
+                        <div class="picupaddress">
+                            <p><strong>Pickup From</strong></p>
+                            <p id="pickupFrom">Unname road, City Center ,Durgapu Unname road, City Center ,Durgapu</p>
+                            <input type="hidden" id="pilotID">
+                            <input type="hidden" id="CustID">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">                      
+                        <div id="btnControl" class="btnBox">                                                       
+                            <input  class="boxbtn" type="button" value="Pass" >
+                            <input onclick="acceptRide()"  class="boxbtn" type="button" value="Accept" >
+                        </div>
+                    
+                        
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <div id="OTP-Content">
+            <h3>Enter OTP</h3>
+            <input type="number" onkeyup="otpinput()" id="otpp" maxlength="4" >
+        </div>
+
+         <!-- For Pickup Drop Content -->
+         <div id="pickDrop-Content">
+            <div class="pickdropHead">
+                <div class="container">        
+                    <div class="row pickdropHeadContainer">
+                        <div class="col-xs-12  col-sm-12 ">
+                           <div class="row">
+                             <div class="col-xs-2 col-sm-2 ">
+                                <a href="tel:100"><button type="button" class="btn btn-danger btn-ms">sos</button></a>
+                            </div>
+                             <div class="col-xs-6 col-sm-6 ">
+                                 <p class="text-center"><span style="font-size: 12px;" class="label label-success col-xs-12 col-sm-12">CRN : <a style="font-size: 20px;" id="orderNO">123546455555</a> </span></p>
+                                    <input id="CustID" type="hidden">
+                                    <input id="OrderOTP" type="hidden">
+                            </div>
+                             <div id="telsms" class="col-xs-4 col-sm-4 ">
+                                <!-- <a href="tel:'+data.cust.isdCode+data.cust.mobileNumber+'"><button type="button" class="btn btn-warning btn-xs"><i class="fa fa-phone" aria-hidden="true"></i></button></a>
+                                <a href="sms:'+data.cust.isdCode+data.cust.mobileNumber+'"><button type="button" class="btn btn-warning btn-xs"><i class="fa fa-comments" aria-hidden="true"></i></button></a> -->
+                                </div>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="row" id="OrderCancelTimer">                        
+                        <div class="col-xs-6 col-sm-6 col-xs-offset-3 col-sm-offset-3 ">
+                            <div style="text-align: center;" class="thumbnail">                                
+                                <div class="caption">
+                                     
+                                    <div id="timeDisplay">
+                                        <p>5:00</p>
+                                    </div>                                  
+                                    <div id="timeBtn">
+                                     <!-- <div class="btn btn-danger" onclick="cancelOrderByDriver(1000)">Cancel Order</div>  
+                                     <div style="margin-top: 5px;" onclick="timeDisplay(1000)" class="btn btn-primary">Wait Again</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+
+                </div>
+            </div>
+            <div  class="pickdropfooter">
+                    <div class="container">
+                        <div class="row pickupfootrer">
+                            <div id="address" class="col-xs-9 col-sm-9">
+                                    <!-- <p>Pick up: <br> <strong>'+data.cust.name+'</strong> <br>'+data.ride.picupaddress+'</p> -->
+                            </div>
+                            <div id="mapBtn" class="col-xs-3 col-sm-3">                            
+
+                                <!-- <button onclick="googlemapbtn()" type="button" class="btn btn-info mybtn"><i class="fa fa-location-arrow" aria-hidden="true"></i></button> -->
+                            </div>
+                        </div>
+                        <div class="row pickupfootrer">
+                            <div id="btnControl" class="col-xs-6 col-sm-6 col-xs-offset-3 col-sm-offset-3">
+                               <input onclick="clineLocated()" id="clineLocated" class="pickupfootrerbtn" type="button" value="Cline Located">
+                               <input onclick="startRide()" id="startRide" class="pickupfootrerbtn" type="button" value="Start Ride">
+                               <input onclick="finishride()" id="finishride" class="pickupfootrerbtn" type="button" value="Finish Ride">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+         </div>
+
+         <div id="billAndfeedback">                    
+            <div class="container">                        
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 ">
+                       <h2 style="color: rgb(44, 40, 7); text-align: center;">Collection Amount</h2>
+                       <p style="font-size: 30px; font-weight: bolder;" class="text-center">&#8377; <span id="amt">142.20</span></p>
+                        <p class="text-center">You Need to Collect Above Amount From Cline at End of Journey</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="border: 2px solid #000; margin-top: 20px;" class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 ">
+                        <p class="text-center">How is your cline Behaviour</p>
+                        <p class="text-center">Share your Rating</p>
+                        <div style="width:75%; margin-left: 13%; ">
+                        <div class="rate">
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                          </div>
+                        </div>
+                        <br>
+                        
+                    </div>
+                </div>
+
+                <div style="margin-top: 100px;" class="row">                                                           
+                       <button id="continueNextRide"  type="button" class="btn  btn-primary col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">Continue Next Ride</button>
+                </div>
+                
+            </div>                    
+        </div>
+            
+            <div id="footer">
+                <div  class="incetext">
+                    <span>Booking Count</span>
+                    <p id="booking">0</p>
+                </div>
+
+                <div   class="incetext">
+                    <span>Earnings</span>
+                    <p>&#8377; <span id="earning">0</span></p>
+                </div>
+                <div  class="incetext">
+                    <span>Cash Collection</span>
+                    <p>&#8377; <span id="cash">0</span></p>
+                </div>
+            </div>
+
+            <!-- Ledger Earning Booking -->
+            <div id="accountLedger">
+              <!-- <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="panel panel-success">
+                            <div class="panel-heading">
+                                  <h3 class="panel-title">Driver Payment Break-Down</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul   class="list-group">
+                                    <li style="margin-bottom: 5px;" class="list-group-item active ">
+                                      <span style="font-size: medium;" class="badge">&#8377;  6</span>
+                                      Kilometer Up to 5:
+                                    </li>
+
+                                    <li style="margin-bottom: 5px;" class="list-group-item active ">
+                                        <span style="font-size: medium;" class="badge">&#8377;  6</span>
+                                        Kilometer Up to 5:
+                                      </li>
+                                   
+                                  </ul> 
+                                  
+                            </div>
+                      </div>
+                      
+                  </div>
+              </div> -->
+              
+                      
+              <!-- <div class="container-fluid">
+                <div style="margin-top: 5px;" class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                       <ul id class="list-group">
+                           <li class="list-group-item active ">
+                             <span style="font-size: medium;" class="badge">&#8377;  500</span>
+                             Total Cash Collection  <span>
+                                <button type="button" class="btn btn-info btn-xs">View Details</button>
+                                </span>
+                           </li>
+                           <li class=" list-group-item list-group-item-info ">
+                               <span class="badge">&#8377;  150</span>
+                               Previous Due
+                             </li>
+                             <li class=" list-group-item list-group-item-info ">
+                               <span class="badge">&#8377;  100</span>
+                               Today's Collcetion
+                             </li>
+                         </ul>                                        
+                    </div>
+       
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                       <ul class="list-group">
+                           <li class="list-group-item active ">
+                             <span style="font-size: medium; " class="badge">&#8377; 20.02 </span>
+                             Driver Earning  <span>
+                                <button type="button" class="btn btn-info btn-xs">View Details</button>
+                                </span>
+                           </li>
+                           <li class=" list-group-item list-group-item-info ">
+                               <span class="badge">&#8377; 10.20</span>
+                               Previous Earning
+                             </li>
+                           <li class=" list-group-item list-group-item-info ">
+                               <span class="badge">&#8377; 0.2</span>
+                               Today's Fuel Cost [10km Run]<br>
+                               Fl Price :&#8377; 83  Milege: 50
+                             </li>
+                             <li class=" list-group-item list-group-item-info ">
+                                <span class="badge">&#8377; 0.2</span>
+                                Today's Minute Charges [120 min]<br>                                
+                              </li>
+                              <li class=" list-group-item list-group-item-info ">
+                                <span class="badge">&#8377; 0.2</span>
+                                Today's Incentive<br>                                
+                              </li>
+                              <li class=" list-group-item list-group-item-info ">
+                                <span class="badge">&#8377; 0.2</span>
+                                Today's Car Maintenance<br> and insurance                                
+                              </li>
+                       </ul>                
+                   </div>
+                </div>
+       
+       
+                <div class="row">
+                    
+                   <div class="col-xs-12 col-sm-12">                
+                                                                  
+                           <input type="hidden" id="payAmount" name="payAmount" class="form-control" value="" >                       
+                                   
+                           <button onclick="icicipay()" type="button" class="btn btn-success btn-block col-xs-12 col-sm-12">Deposit &#8377; 50.00</button>
+                  
+               </div>
+       
+               
+               <div style="margin-top: 20px;" class="row">
+                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      
+                       <a href="../india/preDrv"><button  type="button" class="btn btn-danger col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">Go to Offline</button> </a>              
+                      
+                       
+                       
+                   </div>
+               </div>
+
+            </div> -->
+        </div>
+
+        <div id="accountLedgerDetails">
+            <div class="container-fluid">
+              <div style="margin-top: 5px;" class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                     <ul  class="list-group">
+                         <li class="list-group-item active ">                          
+                           <span style="font-size: 12px;" class="badge">Order Km : 5</span>
+                           <span style="font-size: 12px;" class="badge">Travel km : 7</span> 
+                           CRN : 1145                           
+                         </li>
+                         <li class=" list-group-item list-group-item-info ">
+                             <span class="badge">&#8377;  10.50</span>
+                             Fuel Cost
+                           </li>
+                           <li class=" list-group-item list-group-item-info ">
+                             <span class="badge">&#8377;  5</span>
+                             Payout
+                           </li>
+                           <li class=" list-group-item list-group-item-info ">
+                            <span class="badge">&#8377;  2</span>
+                            Incentive
+                          </li>
+                          <li class=" list-group-item list-group-item-info ">
+                            <span class="badge">&#8377;  0.25</span>
+                            Maintenance
+                          </li>
+
+                          <li class="list-group-item active ">                          
+                            <span style="font-size: 12px;" class="badge">Order Km : 5</span>
+                            <span style="font-size: 12px;" class="badge">Travel km : 7</span> 
+                            CRN : 1145                           
+                          </li>
+                          <li class=" list-group-item list-group-item-info ">
+                              <span class="badge">&#8377;  10.50</span>
+                              Fuel Cost
+                            </li>
+                            <li class=" list-group-item list-group-item-info ">
+                              <span class="badge">&#8377;  5</span>
+                              Payout
+                            </li>
+                            <li class=" list-group-item list-group-item-info ">
+                             <span class="badge">&#8377;  2</span>
+                             Incentive
+                           </li>
+                           <li class=" list-group-item list-group-item-info ">
+                             <span class="badge">&#8377;  0.25</span>
+                             Maintenance
+                           </li>
+
+
+                           <li class="list-group-item active ">                          
+                            <span style="font-size: 12px;" class="badge">Order Km : 5</span>
+                            <span style="font-size: 12px;" class="badge">Travel km : 7</span> 
+                            CRN : 1145                           
+                          </li>
+                          <li class=" list-group-item list-group-item-info ">
+                              <span class="badge">&#8377;  10.50</span>
+                              Fuel Cost
+                            </li>
+                            <li class=" list-group-item list-group-item-info ">
+                              <span class="badge">&#8377;  5</span>
+                              Payout
+                            </li>
+                            <li class=" list-group-item list-group-item-info ">
+                             <span class="badge">&#8377;  2</span>
+                             Incentive
+                           </li>
+                           <li class=" list-group-item list-group-item-info ">
+                             <span class="badge">&#8377;  0.25</span>
+                             Maintenance
+                           </li>
+                       </ul>                                        
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                    <div class="form-group col-xs-8 col-sm-8">                        
+                        <label>Select Date</label>
+                        <%var mm=new Date().getMonth()+1; var dd= new Date().getDate(); var yyyy=new Date().getFullYear()%>
+                        <%if(mm<10){mm = '0' + mm }%>
+                        <%if(dd<10){dd = '0' + dd }%>    
+                        <input  id="day" type="date" class="form-control" value="<%=""+yyyy+"-"+mm+"-"+dd+""%>">
+                        
+                    </div>
+                    <div class="form-group col-xs-4 col-sm-4">
+                        <label style="color: #FFF;">&nbsp;g</label>
+                        <button onclick="dailyLedger()" class="btn btn-primary ">Submit</button> 
+                    </div>
+                    <div id="dailyLedger" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="overflow-x: scroll;" >
+                        <!-- <ul class="list-group">
+                            <li class="list-group-item active ">
+                                19-10-2020
+                            </li>
+        
+                            <li class="list-group-item list-group-item-info ">                        
+                                 Earnings : &#8377;100  Incentive: &#8377;0   Collection : &#8377;0 <br> Withdrawal / Deposit : &#8377;0
+                                  
+                              </li>
+                        </ul>  -->
+                        
+                        
+                    </div>
+        
+        
+                    
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <!-- End MAIN CONTENT -->
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script async defer   
+        src="https://maps.googleapis.com/maps/api/js?key=<%=YOUR_API_KEY%>&callback=initMap">
+        </script>
+    </body>
+</html>

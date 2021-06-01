@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paa Login</title>
+        <link href="/india/images/logo/paaicon.png" rel="icon">
+        <link rel="stylesheet" type="text/css" href="/india/stylesheets/instyle.css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="/india/javascripts/inPreDriverjs.js"></script>
+        
+    </head>
+    <body>
+        <div class="headernav">
+            <img src="/india/images/logo/paalogo.png">
+        </div>
+        
+        <div class="from-content">
+            <form action="/india/preDrv/driverReg" method="POST">
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group">
+                        <%if(msg){%> 
+                        <span style="color: rgb(34, 112, 44); width: 100%; text-align: center;"><%=msg%></span>
+                        <%}%>
+                        <%if(lat){%> 
+                            <input name="lat" type="hidden" value="<%=lat%>">
+                            <input name="lng" type="hidden" value=" <%=lng%>">
+                        <%}else{%>
+                            <input name="lat" type="hidden" value="0.12">
+                            <input name="lng" type="hidden" value="0.24">
+                        <%}%>    
+                        
+                    <label class="control-label" for="mobile">Enter Valid Mobile Number</label>
+                        <div class="input-group">                       
+                            <div class="input-group-addon">+91</div>                    
+                            <input id="mobile" name="mobile" onkeydown="mkeydown()"  onkeyup="mkeyup()" type="number" class="form-control" placeholder="Mobile Number">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="otp-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="row">                        
+                        <div class="form-group">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+                                <input id="otp" onkeyup="verifyOTP()" type="number" class="form-control" placeholder=" 4 Digit OTP">
+                                <input id="otp1" type="hidden">
+                                <label id="otpnotmatch" class="control-label" for="mobile">Not Match</label>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+                                <p id="resendOTP" onclick="resendOTP()">Resend OTP</p>
+                            </div>
+                        </div>
+
+                    </div> 
+                </div>
+                
+                <div id="name-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                            <input id="name" name="name" type="text" class="form-control" placeholder="Your Full Name" required> 
+                    </div>
+                </div>
+                      
+                
+                <div id="password-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                            <input id="password" name="password" type="password" class="form-control" placeholder="Password" required> 
+                    </div>
+                </div>
+
+                <div id="email-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                            <input id="email" name="email" type="email" class="form-control" placeholder="email Id" required> 
+                    </div>
+                </div>
+
+                <div id="submit-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group">                      
+                      <input type="submit" id="submit-btn" class="btn btn-large btn-block btn-success">
+                      <p>
+                        By continuing, You agree of the <a href="">term </a>and <a href="">privacy policy </a> of Paacab 
+                      </p>                           
+                    </div>
+                </div>
+
+                <div id="login-content" class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1">
+                    <div class="form-group"> 
+                            <input type="button" onclick="loginprocess()" class="btn btn-large btn-block btn-success" value="Next">  
+                    </div>
+                </div>
+                                     
+                
+            </div>
+            </form>
+            
+        </div>
+        
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+

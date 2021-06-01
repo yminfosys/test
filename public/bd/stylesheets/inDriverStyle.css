@@ -1,0 +1,305 @@
+
+
+#heder-content{position: fixed;
+    height: 7vh;
+    top: 0;
+    width: 100%; 
+    border-bottom:1px solid orangered;
+    border: 0;
+	  box-sizing: border-box;
+	  margin: 0;
+    padding: 0;
+    background: #575757;
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+	overflow: hidden;
+  }
+  :root {
+    font-size: calc(48px + (60 - 48)*(100vw - 320px)/(1024 - 320));
+  }
+
+  #heder-content input{
+    color: #fff;
+	font: 1em "Helvetica Neue", Helvetica, sans-serif;
+	line-height: 1.5;
+  }
+
+#mapcontent{position: fixed;
+    height: 83vh;
+    top: 7vh;
+    width: 100%; 
+  }
+  #map {
+    height: 100%;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+    display: none;
+   }
+
+   #map .demandArea {
+    position: absolute;
+    /*url of the marker*/
+    background: url(/india/images/demand.png) no-repeat;
+    /*center the marker*/
+    top: 52%;
+    left: 90%;
+    z-index: 6;
+    /*fix offset when needed*/
+    /* margin-left: -10px;
+    margin-top: -35px; */
+    /*size of the image*/
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+  }
+
+ 
+
+  #map .demandUpdate {
+    position: absolute;
+    /*url of the marker*/
+    background: url(/india/images/update.png) no-repeat;
+    /*center the marker*/
+    top: 46%;
+    left: 90%;
+    z-index: 6;
+    /*fix offset when needed*/
+    /* margin-left: -10px;
+    margin-top: -35px; */
+    /*size of the image*/
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    display: none;
+  }
+  #map-msg{
+    position: fixed;
+    height: 20vh;
+    top: 34vh;
+    width: 80%; 
+    z-index: 10;
+    left: 10%;
+    display: none;
+  }
+  #map-msg img{ width: 100%; height: 100%;}
+
+   #offline-content{
+    width: 50%; height: 10%; margin-top: 45%; 
+    margin-left: 25%; text-align: center; 
+    font-size: 22px;
+    color: red;
+  }
+
+  
+
+   #footer{
+    position: fixed;
+    height: 10vh;
+    top: 90vh;
+    width: 100%;
+    background-color: #facb3d;
+    border-top: 1px solid #000;
+   }
+
+   .incetext{position: relative; float: left; font-size:12px; width: 30%; left: 5%; top: 5px; text-align: center; } 
+.incetext p{font-weight: bolder; font-size: 16px;}
+.mapcontent{position: fixed;
+  height: 80vh;
+  top: 17vh;
+  width: 100%; 
+  background-color: rgb(238, 241, 241);
+}
+
+
+#ringtone{
+  position: fixed;
+  height: 100vh;
+  top: 0vh;
+  width: 100%; 
+  background-color: #23c05f;
+  z-index: 51;
+  display:none;
+}
+
+
+
+
+#pickDrop-Content{
+  position: fixed;
+  height: 100vh;
+  top: 0vh;
+  width: 100%;  
+  z-index: 55;  
+  display:none;
+}
+.pickdropHead{height: 8vh; background-color: #FFF; border-bottom: 1px solid #000;}
+.pickdropHeadContainer{margin-top: 10px;}
+.pickdropfooter{height: 28vh; margin-top: 72vh; background-color: #FFF; border-top: 1px solid #000;}
+.pickupfootrer{height: 80px; font-size: 14px; overflow: hidden; }
+.pickupfootrerbtn{border:1px solid rgb(71, 7, 7) ; 
+  color: #facb3d; padding: 5px;background-color: #1c201d; border-radius: 5px;
+  text-align: center; width:100%;}
+ #startRide{display: none;} 
+ #finishride{display: none;} 
+.mybtn{font-size: 25px; margin-top: 5px;} 
+
+#OrderCancelTimer{
+  margin-top: 40px;
+  display: none;
+}
+#timeDisplay{  margin: 5%; background-color: rgb(199, 212, 12); border: 3px solid rgb(18, 3, 85);
+border-radius: 20%;}
+#timeDisplay p{ font-size: 30px; font-weight: bolder;}
+#timeBtn{
+  display: none;
+}
+
+#billAndfeedback{ position: fixed; width: 100%; height: 100vh; background-color: #eeebea; z-index: 100; display: none;}
+
+#OTP-Content{
+  position: fixed;
+  height: 20vh;
+  top: 35vh;
+  width: 100%;  
+  z-index: 100;
+  background-color: #213328; 
+  text-align: center; 
+  color: #facb3d;
+  color: #df0d0d;
+  display:none;
+}
+#OTP-Content input{ text-align: center; font-size: 25px; letter-spacing: 10px; width: 150px; color: #575757; }
+
+
+.myCanvascircle{margin-left: -15%;}
+.picupaddress{width: 100%; height: 150px; overflow: hidden;}
+.picupaddress p{ text-align: center; font-size: 15px; color: #cce9d7; font-style: italic;}
+.btnBox{margin-top: 100px; width: 80%; margin-left: 10%;}
+.boxbtn{
+  position: relative; width: 40%; margin-left: 7.25%; height: 40px; float: left; border:2px solid rgb(71, 7, 7) ;
+  border-radius: 5px; background-color: rgba(25, 23, 27, 0.9); font-size: 16px; color: chartreuse;
+}
+
+
+   .toggle, .toggle:before, .slot__label, .curtain {
+    transition-property: background-color, transform, visibility;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in, cubic-bezier(0.6,0.2,0.4,1.5), linear;
+  }
+  .toggle:before, .slot, .slot__label {
+    display: block;
+  }
+  .toggle:before, .curtain {
+    position: absolute;
+  }
+  .toggle:checked, .curtain {
+    background-color: #2b7f3a;
+  }
+  .toggle:focus {
+    outline: transparent;
+  }
+  .toggle {
+    border-radius: 0.75em;
+    box-shadow: 0 0 0 0.1em inset;
+    cursor: pointer;
+    position: relative;
+    margin-right: 0.25em;
+    width: 3em;
+    height: 1.5em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .toggle:before {
+    background: currentColor;
+    border-radius: 50%;
+    content: "";
+    top: 0.2em;
+    left: 0.2em;
+    width: 1.1em;
+    height: 1.1em;
+  }
+  .toggle:checked:before {
+    transform: translateX(1.5em);
+  }
+  .toggle:checked ~ .slot .slot__label, .slot__label:nth-child(2) {
+    transform: translateY(-50%) scaleY(0);
+  }
+  .toggle:checked ~ .slot .slot__label:nth-child(2) {
+    transform: translateY(-100%) scaleY(1);
+  }
+  .toggle:checked ~ .curtain {
+    transform: scaleX(1);
+  }
+  .slot {
+    color: transparent;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    overflow: hidden;
+    height: 1em;
+    text-indent: -0.9em;
+    -webkit-text-stroke: 0.05em #fff;
+  }
+  .slot__label {
+    transform-origin: 50% 0;
+  }
+  .slot__label:nth-child(2) {
+    transform-origin: 50% 100%;
+  }
+  .curtain {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    z-index: -1;
+  }
+
+
+
+  
+  *{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:rgb(109, 100, 100);
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #fffb00;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #fffb00;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #fffb00;
+}
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */

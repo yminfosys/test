@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><%=title%></title>
+        <link rel="stylesheet" type="text/css" href="/index/stylesheets/navbar.css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            .ride-details{height: 425px; border: 1px solid #000; padding: 10px; border-radius: 10px;}
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-def navbar-fixed-top">
+            <div class="container-fluid ">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../">
+                        <img style="margin-top: -10px;" alt="brand" src="/index/images/logo/paalogo.png" width="100" height="40">
+                  </a>
+              </div>
+          
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="../../india/admin"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="../india/admin/subreg" ><i class="fa fa-amazon" aria-hidden="true"></i> Add Sub Admin</a></li>
+                    
+                  
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+
+          
+          <div class="container-fluid">
+            <div class="page-header">
+                <h1>Ride Details<small> for India</small></h1>
+            </div>              
+              <div class="row">
+                  <div style="margin-left: 10px;" class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ride-details">                  
+                        <div class="form-group">
+                            <label>Driver Type</label>
+                            <select id="driverType" class="form-control">
+                                <option value="preRide">Pre Ride Driver</option>
+                                <!-- <option value="General">General Driver</option>  -->
+                                <option value="Tride">Time Incentive Driver</option>                               
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Driver Travel Mode</label>
+                            <select id="travelmode" class="form-control">
+                                <option value="1">Bike Taxi</option>
+                                <option value="2">CNG</option>
+                                <option value="3">Mini 4set</option>
+                                <option value="4">6 Sit</option>                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ride Status</label>
+                            <select id="rideStatus" class="form-control">
+                                <option value="complete">Complete</option>
+                                <option value="CalcelByCustomer">Cancel By Customer</option> 
+                                <option value="CalcelByDriver">Cancel By Driver</option> 
+                                <option value="CalcelBySubAdmin">Cancel By Admin</option>                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Day / Month Wise</label>
+                            <select onchange="daymonth()" id="dayMonth" class="form-control">
+                                <option>Select</option>
+                                <option value="day">Daily</option>
+                                <option value="month">Monthly</option> 
+                                                             
+                            </select>
+                        </div>
+                        <div id="month" class="form-group" style="display: none;">
+                            <label>Select Month</label>
+                          <input id="se-month" type="month" class="form-control">
+                        </div>
+                        <div id="day" class="form-group" style="display: none;">
+                            <label>Select Date</label>
+                          <input id="se-date" type="date" class="form-control">
+                        </div>
+                    
+                        <button onclick="rideDetails()" type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+
+                  <div style="margin-left: 10px;" class="col-xs-11 col-sm-11 col-md-9 col-lg-9 ride-details">
+                    <div id="list-result" style="height: 100%; overflow-y: auto; " class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <!-- <ul class="list-group">
+                            <li class="list-group-item active">
+                              <span style="font-size:small; " class="badge"> Total :&#8377; 20 </span>
+                              <span style="font-size:small; " class="badge"> Cash :&#8377; 20 </span>
+                              <span style="font-size:small; " class="badge"> 4 KM</span>
+                              <span style="font-size:small; " class="badge">Pay Mod: 1</span>
+                              <span style="font-size:small; " class="badge">Driver ID: 1020</span>
+                              Booking No: 102
+                            </li>
+                            <li class="list-group-item list-group-item-info">                            
+                                Pickup Address:  <br> 
+                                Drop Address:
+                            </li>                        
+                        </ul>      -->
+                    </div>
+
+                    <div id="list-result-total" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <!-- <div class="thumbnail">
+                                <img data-src="#" alt="">
+                                <div class="caption">                                    
+                                   <p>Total KM: 1000</p>
+                                   <p>Total Collection: 1000</p>
+                                   <p>Total Amount: 1000</p>
+                                </div>
+                            </div> -->
+                    </div>
+                  </div>
+              </div>
+              
+              
+          </div>
+
+          <script>
+              function daymonth(){
+                var dayMonth=$("#dayMonth").val();
+                if(dayMonth=="day"){                   
+                    $("#month").css({"display":"none"})
+                    $("#day").css({"display":"block"})
+                }else{
+                    $("#month").css({"display":"block"})
+                    $("#day").css({"display":"none"})
+                }
+              }
+
+              function rideDetails(){
+                  var searchbtn='';
+                  var searchdate;
+                  var driverType=$("#driverType").val();
+                  var travelmode=$("#travelmode").val();
+                  var rideStatus=$("#rideStatus").val();
+                  var dayMonth=$("#dayMonth").val();
+
+                  if(dayMonth=="day"){                   
+                    searchdate=$("#se-date").val();
+                    searchbtn='day'
+                }else{
+                    searchdate=$("#se-month").val();
+                    searchbtn='month'
+                }
+
+                $.post('/india/admin/ridedetails',{
+                    driverType:driverType,
+                    rideStatus:rideStatus,
+                    rideStatus:rideStatus,
+                    searchdate:searchdate,
+                    searchbtn:searchbtn,
+                    travelmode:travelmode
+                },function(data){
+                    var out="";
+                    var totalkm=0;
+                    var totalAmt=0;
+                    var totalCash=0;
+                    var fuleConsumption=0;
+                    var demandFulecost=0;
+                    if(data.result.length>0){                    
+                     data.result.forEach(function(val,indx, array){
+                         if(val.driverCashCollectio){
+                            var driverCashCollectio=val.driverCashCollectio; 
+                         }else{
+                            var driverCashCollectio=0;  
+                         }
+
+                         var ttamt=Number(val.totalamount) + Number(val.timefare);
+                         if(ttamt<10){
+                            ttamt=10; 
+                         }
+                                                
+                        out+='<ul class="list-group">\
+                            <li class="list-group-item active">\
+                              <span style="font-size:small; " class="badge"> Total :&#8377; '+ttamt.toFixed(2)+' </span>\
+                              <span style="font-size:small; " class="badge"> Cash :&#8377; '+Number(driverCashCollectio).toFixed(2)+' </span>\
+                              <span style="font-size:small; " class="badge"> '+val.kmtravels+' KM</span>\
+                              <span style="font-size:small; " class="badge">Pay Mode: '+val.paymentBy+'</span>\
+                              <span style="font-size:small; " class="badge">Driver ID: '+val.pilotID+'</span>\
+                              Booking No: '+val.bookingID+'\
+                            </li>\
+                            <li class="list-group-item list-group-item-info">\
+                                Pickup Address: '+val.picupaddress+' GPS: '+val.picuklatlng[0]+', '+val.picuklatlng[1]+' <br>\
+                                Drop Address: '+val.dropaddress+' GPS: '+val.droplatlng[0]+', '+val.droplatlng[1]+' <br>Customer ID: '+val.CustID+'\
+                            </li>\
+                        </ul>'
+
+                        if(val.kmtravels){
+                            totalkm=Number(totalkm) + Number(val.kmtravels)
+                        }
+                        if(val.driverCashCollectio){
+                            totalCash=Number(totalCash) + Number(val.driverCashCollectio);
+                        }
+                        if(val.totalamount){
+                            totalAmt=Number(totalAmt) + Number(ttamt);   
+                        }
+
+                        if(indx === array.length -1){
+
+                            if(data.fueldemand.length>0){                    
+                                data.fueldemand.forEach(function(valu,ind, ary){
+                                    fuleConsumption=Number(fuleConsumption)+Number(valu.fuleConsumption);
+                                    if(valu.pickupDistance=='0'){
+                                        demandFulecost=Number(demandFulecost)+Number(valu.fuleConsumption);
+                                    }
+                                    if(ind === ary.length -1){
+
+                                        if(totalAmt>fuleConsumption){
+                                            var npv='+ ve';
+                                        }else{
+                                            var npv='- ve'; 
+                                        }
+                                        $("#list-result").html(out)
+                                        $("#list-result-total").html(' <div class="thumbnail">\
+                                        <img data-src="#" alt="">\
+                                        <div class="caption">\
+                                        <p>Total Order Count: '+array.length+'</p>\
+                                        <p>Total KM: '+totalkm+'</p>\
+                                        <p>Total Cash Collection: '+totalCash+'</p>\
+                                        <p>Total Amount: '+totalAmt+'</p>\
+                                        <p>FuelCost : '+fuleConsumption.toFixed(2)+'</p>\
+                                        <p>Demand FuelCost : '+demandFulecost.toFixed(2)+'</p>\
+                                        <p>Business NPV : '+npv+'</p>\
+                                        </div>\
+                                        </div>')
+                                    }
+                                })
+
+                            }else{
+                                $("#list-result").html(out)
+                                $("#list-result-total").html(' <div class="thumbnail">\
+                                <img data-src="#" alt="">\
+                                <div class="caption">\
+                                   <p>Total Order Count: '+array.length+'</p>\
+                                   <p>Total KM: '+totalkm+'</p>\
+                                   <p>Total Cash Collection: '+totalCash+'</p>\
+                                   <p>Total Amount: '+totalAmt+'</p>\
+                                   <p>FuelCost : '+fuleConsumption+'</p>\
+                                </div>\
+                                </div>')
+
+                            }
+                           
+                            
+                        } 
+                      });
+                                            
+
+                    }else{
+                        $("#list-result").html(' ') 
+                    }
+                   
+                    
+                    
+                })
+
+              }
+          </script>
+          
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

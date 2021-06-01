@@ -1,0 +1,167 @@
+/* Login and Register */
+.headernav{
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 20vh;
+  background-color: #facb3d;
+  border-bottom: 3px solid #000;
+
+  
+}
+.headernav img{
+  width: 40%;
+  height: 50%;
+  margin-left: 30%;
+  margin-top: 2%;
+
+}
+.from-content{
+  position: fixed;
+  top: 20vh;
+  width: 100%;
+  height: 80vh;
+  background-color: #e2d9c0;
+  padding-top: 10%;
+
+}
+/* display offf */
+#otp-content, #name-content, #password-content, #submit-content,#email-content,#login-content{ display: none;} 
+#mobile{font-size: larger;}
+#otpnotmatch{display: none;}
+#resendOTP{margin-top: 5px; color: rgb(45, 17, 170); text-align: center; width: 100%; }
+/* End Login and Register */
+
+/* main Customer Operatio */
+#placesearch{
+  position:fixed;height: 100vh; width: 100%;  background-color: rgb(189, 183, 181); z-index: 20; display: none;
+}
+.searchGif{position: relative; width: 100%; height: 4px; top: -6px; display: none;}
+  #placesearch form{margin-top: 10%;}
+  #placeList{height: 60vh; overflow: auto; }
+  .imgIcon{position: relative; width: 30px; height: 30px;}
+  #closall{position: relative; width: 50px; height: 10px; left: 45%; top: 5px; background-color: sienna; border-radius: 2px; cursor: pointer;}
+
+#mapcontent{position: fixed;
+  height: 58vh;
+  top: 0;
+  width: 100%; 
+}
+#map {
+  height: 100%;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }
+ #notification{
+  position: absolute;
+  width: 30px; height: 30px;
+  border: 2px solid #000; border-radius: 50%;
+  color: #facb3d;
+  background-color: rgb(70, 8, 23);
+  overflow: hidden;
+  text-align: center;
+  font-size: 20px;
+  top: 2%;
+  right: 2%;
+  z-index: 6;
+}
+
+  #promoMsg{
+    position: absolute;
+    background-color: rgba(233, 229, 12, 0.7);
+    top: 70%;
+    width: 80%;
+    left: 10%;
+    z-index: 6;
+    display: none;
+
+  }
+
+ #map .centerMarker {
+  position: absolute;
+  /*url of the marker*/
+  background: url(/india/images/centerpin.png) no-repeat;
+  /*center the marker*/
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  /*fix offset when needed*/
+  margin-left: -16px;
+  margin-top: -32px;
+  /*size of the image*/
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+#map .navigationMarker {
+  position: absolute;
+  /*url of the marker*/
+  background: url(/india/images/gpsloc.png) no-repeat;
+  /*center the marker*/
+  top: 85%;
+  left: 85%;
+  z-index: 6;
+  /*fix offset when needed*/
+  /* margin-left: -10px;
+  margin-top: -35px; */
+  /*size of the image*/
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+ #footer{
+  position: fixed;
+  height: 42vh;
+  top: 58vh;
+  width: 100%; 
+  background-color: #FFF;
+ }
+#traval-mod{ width: 80%; margin-left: 10%; height: 90px;  overflow-y:scroll;}
+#traval-mod-item{width: 25%; height: 100%;  float: left;}
+.modeContenttime {width: 100%; height: 15px; text-align:center; font-size:small; display: none; }
+.modeContenwait{width: 50%; height: 15px; margin-left: 20%;}
+.modeImg{width: 60%; height:45px; margin-left: 20%; margin-top: 2px; border: 1px solid #000; }
+.modeContentprice{width: 100%; height: 15px; margin-top: 2px; text-align:center; font-size:small; display: none;}
+
+#footer-prebooking{display: none;}
+.tm-img{width:32px; border: 1px solid #000; border-radius: 10px;}
+#booking-process{ margin-top: 10%;
+  display: none;
+  
+}
+
+#prebooking-process{
+  display: none;
+}
+
+#waletPayment{
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  background-color: #FFF;
+  display: none;
+}
+
+#footer-preRide{
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: #FFF;
+  display: none;
+}
+#preRideAmount{
+  height: 78px; width: 100%;  color: rgb(8, 56, 19); text-align: center;
+  margin-top: 10px; font-size: large;
+}
+
+/* END main Customer Operatio */
+
+
+/* map poppap */
+/* The popup bubble styling. */

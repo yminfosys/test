@@ -1,0 +1,91 @@
+
+#map-content{position: fixed;
+    height: 75vh;
+    top: 0vh;
+    width: 100%; 
+    
+  }
+  #map {
+    height: 100%;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+    /* display: none; */
+   }
+
+   #footer{
+    position: fixed;
+    height: 25vh;
+    top: 75vh;
+    width: 100%; 
+    border-top: 1px solid rgb(48, 32, 32);
+    border-bottom : 1px solid rgb(48, 32, 32);
+    background-color: #FFF;
+
+   }
+
+   #watchTime{ text-align: center; font-size: 20px; font-weight: bolder; 
+    border: 2px solid #03032c; background-color: #fffb00; color: brown; margin-left: 5px; }
+   #massage-notification{
+    position: fixed;
+    height: 15vh;
+    top: 35vh;
+    width: 90%;
+    margin-left: 5%;
+    z-index: 100;
+    display: none;
+    
+   }
+
+   #driver-content{margin-top: 10px;}
+   .drive-img{position: relative; border: 1px solid rgb(66, 5, 5); width: 20%;  float: left;}
+   .driver-details{position: relative;  width: 40%; float: left; margin-left: 5%;}
+   .otp{ text-align: center; border: 1px solid rgb(59, 24, 24); border-radius: 5px; height: 30px; padding-top: 3px;}
+   .car-details{position: relative;  width: 30%; float: left; margin-left: 5%;}
+
+   .mystyl{padding: 5px; position: relative; float: left;
+    border: 1px solid rgb(61, 56, 56); border-radius: 5px; margin-top: 10px;
+    }
+
+    #billAndfeedback{ position: fixed; width: 100%; height: 100vh; background-color: #eeebea; z-index: 100; display: none; }
+    *{
+      margin: 0;
+      padding: 0;
+  }
+  .rate {
+      float: left;
+      height: 46px;
+      padding: 0 10px;
+  }
+  .rate:not(:checked) > input {
+      position:absolute;
+      top:-9999px;
+  }
+  .rate:not(:checked) > label {
+      float:right;
+      width:1em;
+      overflow:hidden;
+      white-space:nowrap;
+      cursor:pointer;
+      font-size:30px;
+      color:rgb(109, 100, 100);
+  }
+  .rate:not(:checked) > label:before {
+      content: '★ ';
+  }
+  .rate > input:checked ~ label {
+      color: #fffb00;    
+  }
+  .rate:not(:checked) > label:hover,
+  .rate:not(:checked) > label:hover ~ label {
+      color: #fffb00;  
+  }
+  .rate > input:checked + label:hover,
+  .rate > input:checked + label:hover ~ label,
+  .rate > input:checked ~ label:hover,
+  .rate > input:checked ~ label:hover ~ label,
+  .rate > label:hover ~ input:checked ~ label {
+      color: #fffb00;
+  }
+  
+  /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+
+

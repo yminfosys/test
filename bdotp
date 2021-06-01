@@ -1,0 +1,17 @@
+http://alphasms.biz/index.php?app=ws&u=paacabsgmail.com&h=390bb5b5fd9ce63aeb92a91d35995616&op=pv&to=+8801701045141&msg=12345+only
+
+{"data":[{"status":"OK","error":"0","smslog_id":"1096870","queue":"b08139353aba07158f00ea21b53f5895","to":"8801701045141"}],"error_string":null,"timestamp":1589475537}
+
+{"status":"ERR","error":"100","error_string":"authentication failed","timestamp":1589478939}
+
+
+smsotp.otpsendBD({
+  apikey:process.env.ALFA_HASH,
+  mobileno:"+880"+req.body.mobile+"",
+  otp:""+req.body.otp+""  
+},function(data){
+    console.log(data);
+    res.send(data); 
+})
+
+

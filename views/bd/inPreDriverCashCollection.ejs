@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paa Login</title>
+        <link href="/bd/images/logo/paaicon.png" rel="icon">
+        <link rel="stylesheet" type="text/css" href="/bd/stylesheets/instyle.css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- <script src="/bd/javascripts/inPreDriverjs.js"></script> -->
+        
+        
+    </head>
+    <body>
+        <!-- <div class="headernav">
+            <img src="/bd/images/logo/paalogo.png">
+        </div> -->
+        
+        
+       
+       <div class="container-fluid">
+
+        <div style="background-color: #facb3d;" class="row">
+            <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4 ">
+                <img style="width: 100%;" src="/bd/images/logo/paalogo.png">
+            </div>
+        </div>
+         
+         <div style="margin-top: 30px;" class="row">
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-group">
+                    <li class="list-group-item active ">
+                      <span style="font-size: medium;" class="badge">&#2547;  <%=Number(previousDue)+ Number(dailyCollection)%></span>
+                      Total Cash Collection
+                    </li>
+                    <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#2547;  <%=previousDue%></span>
+                        Previous Due
+                      </li>
+                      <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#2547;  <%=dailyCollection%></span>
+                        Today's Collcetion
+                      </li>
+                  </ul>
+                                 
+             </div>
+
+             
+
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-group">
+                    <li class="list-group-item active ">
+                      <span style="font-size: medium; " class="badge">&#2547; <%=Number(PendingConsumption)+ Number(dailyConsum.dailyConsm)%> </span>
+                      Fule Consumption
+                    </li>
+                    <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#2547; <%=PendingConsumption%></span>
+                        Pending Consumption
+                      </li>
+                    <li class=" list-group-item list-group-item-info ">
+                        <span class="badge">&#2547; <%=dailyConsum.dailyConsm%></span>
+                        Today's KM Run <%=dailyConsum.totalkm%>KM<br>
+                        Fl Price :&#2547; <%=dailyConsum.fulePrice%>  Milege: <%=dailyConsum.mileage%>
+                      </li>
+                </ul>                
+            </div>
+         </div>
+
+
+         <div class="row">
+             <%var cashColc=Number(previousDue)+ Number(dailyCollection)%>
+             <%var fulecomsum=Number(PendingConsumption)+ Number(dailyConsum.dailyConsm)%>
+             <%if( cashColc - fulecomsum > 0){%> 
+            <div class="col-xs-12 col-sm-12">                
+                <form action="/bd/pay" method="POST" class="form-inline" role="form">                                           
+                    <input type="hidden" name="payAmount" class="form-control" value="<%= Math.abs(cashColc - fulecomsum).toFixed(2)%>" >                       
+                    <input type="hidden" name="CustID" value="<%=pilot.pilotID%>">
+                    <input type="hidden" name="typeOfReqest" value="preDriverDeposit">                  
+                   <button type="submit" class="btn btn-success btn-block col-xs-12 col-sm-12">Deposit &#2547; <%= Math.abs(cashColc - fulecomsum).toFixed(2)%></button> 
+               </form>
+            </div>
+            <%}else{%>
+            <div class="col-xs-12 col-sm-12"> 
+                <form name="myForm" action="/bd/withdrawal" onsubmit="return validateForm()" method="POST" class="form-inline" role="form">                                           
+                    <input type="hidden" name="withdrawlAmount" class="form-control" value="<%= Math.abs(fulecomsum - cashColc).toFixed(2)%>" >                       
+                    <input type="hidden" name="pilotID" value="<%=pilot.pilotID%>">
+                    <input type="hidden" name="typeOfReqest" value="preDriverWidthral">
+                    <button type="submit" class="btn btn-warning btn-block col-xs-12 col-sm-12">Withdrawal &#2547; <%=fulecomsum - cashColc%></button>               
+                  </form>             
+            </div>
+            <%}%>
+        </div>
+
+        
+        <div style="margin-top: 20px;" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <%if(exit=="exit"){%> 
+                <a href="../bd/preDrv"><button  type="button" class="btn btn-danger col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">Go to Offline</button> </a>              
+                <%}else{%> 
+                <a href="../bd/preDrv"><button  type="button" class="btn btn-danger  col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-4">Back</button>  </a>              
+                <%}%>
+            </div>
+        </div>
+        
+
+ 
+           
+       </div>
+       
+        
+        
+            
+       <script>
+       function validateForm() {
+            var x = document.forms["myForm"]["withdrawlAmount"].value;
+            if (x > 49) {
+                
+                return true;
+            }else{
+                alert("amount Should be more the 50");
+                return false;  
+            }
+            }
+       </script>
+        
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+
